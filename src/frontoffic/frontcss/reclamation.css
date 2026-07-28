@@ -1,0 +1,1162 @@
+/* Reclamation - Material Design 3 Honoris */
+
+.reclamation-page {
+  min-height: 100vh;
+  background: #f8f9fa;
+}
+
+.reclamation-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem 5rem;
+}
+
+.reclamation-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+}
+
+.reclamation-left {
+  min-width: 0;
+}
+
+.reclamation-header {
+  margin-bottom: 2.5rem;
+}
+
+.reclamation-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 6vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #191c1d;
+  letter-spacing: -0.5px;
+  font-family: "Manrope", sans-serif;
+}
+
+.reclamation-subtitle {
+  margin: 0.75rem 0 0;
+  font-size: 1.125rem;
+  color: #5a403e;
+  max-width: 760px;
+  line-height: 1.6;
+  font-family: "Inter", sans-serif;
+}
+
+.reclamation-alert,
+.reclamation-rh-status {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.reclamation-alert .material-symbols-outlined,
+.reclamation-rh-status .material-symbols-outlined {
+  font-size: 1.25rem;
+  line-height: 1.25rem;
+  flex-shrink: 0;
+}
+
+.reclamation-alert-success,
+.reclamation-rh-status.ok {
+  background: #d1f3d6;
+  color: #065f46;
+}
+
+.reclamation-alert-error,
+.reclamation-rh-status.warn {
+  background: #fdd7d7;
+  color: #ba1a1a;
+}
+
+.reclamation-form-card {
+  background: #ffffff;
+  border: none;
+  border-radius: 0.75rem;
+  padding: 2rem;
+  box-shadow: 0 12px 32px rgba(25, 28, 29, 0.04);
+}
+
+.reclamation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.reclamation-form-top-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+
+.reclamation-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.reclamation-label {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #5a403e;
+  padding: 0 0.25rem;
+  font-family: "Inter", sans-serif;
+}
+
+.reclamation-select {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #edeeef;
+  background: transparent;
+  color: #191c1d;
+  padding: 0.75rem 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  transition: border-color 0.2s ease;
+  appearance: none;
+  padding-right: 1.5rem;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%235a403e' d='M1 1l5 5 5-5'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 1rem;
+  cursor: pointer;
+}
+
+.reclamation-select:focus {
+  outline: none;
+  border-bottom-color: #7e0008;
+}
+
+.reclamation-input {
+  width: 100%;
+  border: none;
+  border-bottom: 2px solid #edeeef;
+  background: transparent;
+  color: #191c1d;
+  padding: 0.75rem 0.25rem;
+  font-size: 1rem;
+  font-weight: 600;
+  font-family: "Inter", sans-serif;
+  transition: border-color 0.2s ease;
+}
+
+.reclamation-input:focus {
+  outline: none;
+  border-bottom-color: #7e0008;
+}
+
+.reclamation-input::placeholder {
+  color: #a6a6aa;
+}
+
+.reclamation-priority-row {
+  display: flex;
+  gap: 1rem;
+}
+
+.priority-chip {
+  flex: 1;
+  border: 2px solid #e1e3e4;
+  background: #ffffff;
+  color: #5a403e;
+  border-radius: 0.5rem;
+  padding: 0.625rem 0;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  font-family: "Inter", sans-serif;
+}
+
+.priority-chip:hover {
+  border-color: #c9c9cd;
+}
+
+.priority-chip.active {
+  border-color: #3f6653;
+  background: #f0f5f2;
+  color: #3f6653;
+}
+
+.reclamation-textarea {
+  width: 100%;
+  border: none;
+  border-radius: 0.75rem;
+  background: #f8fafc;
+  color: #191c1d;
+  padding: 1.25rem;
+  font-size: 1rem;
+  font-weight: 400;
+  font-family: "Inter", sans-serif;
+  resize: vertical;
+  min-height: 150px;
+  line-height: 1.6;
+  transition: box-shadow 0.2s ease;
+}
+
+.reclamation-textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(126, 0, 8, 0.1);
+}
+
+.reclamation-textarea::placeholder {
+  color: #a6a6aa;
+}
+
+.reclamation-file-dropzone {
+  position: relative;
+  width: 100%;
+}
+
+.reclamation-file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.reclamation-file-overlay {
+  border: 2px dashed #ddd7d6;
+  border-radius: 0.75rem;
+  min-height: 140px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  text-align: center;
+  color: #5a403e;
+  background: #fefaf9;
+  transition: all 0.2s ease;
+  padding: 1.5rem;
+  cursor: pointer;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.reclamation-file-dropzone:hover .reclamation-file-overlay {
+  border-color: #7e0008;
+  background: #fff5f5;
+  box-shadow: 0 4px 12px rgba(126, 0, 8, 0.1);
+}
+
+.reclamation-file-overlay .material-symbols-outlined {
+  color: #5a403e;
+  font-size: 3rem;
+  line-height: 3rem;
+  margin-bottom: 0.5rem;
+  display: block;
+  text-align: center;
+  font-weight: normal;
+  letter-spacing: normal;
+  text-transform: none;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+}
+
+.reclamation-file-dropzone:hover .reclamation-file-overlay .material-symbols-outlined {
+  color: #7e0008;
+}
+
+.reclamation-file-overlay p {
+  margin: 0;
+  font-weight: 600;
+  font-size: 1rem;
+  font-family: "Inter", sans-serif;
+}
+
+.reclamation-file-overlay span {
+  font-size: 0.75rem;
+  color: #8e706c;
+  font-family: "Inter", sans-serif;
+}
+
+.reclamation-submit-wrap {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.5rem;
+}
+
+.reclamation-submit-btn {
+  border: none;
+  border-radius: 0.75rem;
+  background: linear-gradient(135deg, #7e0008 0%, #a31919 100%);
+  color: #ffffff;
+  font-size: 1.125rem;
+  font-weight: 700;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 12px 32px rgba(126, 0, 8, 0.2);
+  transition: all 0.2s ease;
+  font-family: "Manrope", sans-serif;
+}
+
+.reclamation-submit-btn:hover:not(:disabled) {
+  transform: scale(1.02);
+}
+
+.reclamation-submit-btn:active:not(:disabled) {
+  transform: scale(0.95);
+}
+
+.reclamation-submit-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.reclamation-submit-btn .material-symbols-outlined {
+  font-size: 1.25rem;
+}
+
+.reclamation-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.sidebar-card {
+  border-radius: 0.75rem;
+  padding: 2rem;
+  border: none;
+}
+
+.tips-card {
+  background: #f0fdf4;
+  border: 1px solid #d1f3d6;
+}
+
+.trust-card {
+  background: #fafbfc;
+  border: 1px solid #e1e3e4;
+}
+
+.sidebar-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.sidebar-card-header .material-symbols-outlined {
+  font-size: 1.5rem;
+  line-height: 1.5rem;
+}
+
+.tips-card .sidebar-card-header .material-symbols-outlined {
+  color: #3f6653;
+}
+
+.trust-card .sidebar-card-header .material-symbols-outlined {
+  color: #7e0008;
+}
+
+.sidebar-card-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #191c1d;
+  font-family: "Manrope", sans-serif;
+}
+
+.tips-card h3 {
+  color: #3f6653;
+}
+
+.trust-card h3 {
+  color: #191c1d;
+}
+
+.tips-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.tips-card li {
+  display: flex;
+  gap: 1rem;
+}
+
+.tips-card li span {
+  color: #3f6653;
+  font-weight: 700;
+  font-size: 1rem;
+  flex-shrink: 0;
+  font-family: "Manrope", sans-serif;
+}
+
+.tips-card li p {
+  margin: 0;
+  color: #5a403e;
+  font-size: 0.9rem;
+  line-height: 1.55;
+  font-family: "Inter", sans-serif;
+}
+
+.trust-card p {
+  margin: 0 0 1.5rem 0;
+  color: #5a403e;
+  font-size: 0.9rem;
+  line-height: 1.6;
+  font-family: "Inter", sans-serif;
+}
+
+.policy-link {
+  margin-top: 0;
+  border: none;
+  background: transparent;
+  color: #7e0008;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-family: "Inter", sans-serif;
+  transition: color 0.2s ease;
+}
+
+.policy-link:hover {
+  color: #a31919;
+}
+
+.policy-link .material-symbols-outlined {
+  font-size: 1.125rem;
+  line-height: 1.125rem;
+}
+
+.reclamation-footer {
+  margin-top: 2rem;
+  background: #7e0008;
+  color: #fff;
+  width: 100%;
+}
+
+.reclamation-footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  font-weight: 800;
+  font-size: 1.125rem;
+  font-family: "Manrope", sans-serif;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.8);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-family: "Inter", sans-serif;
+  transition: color 0.2s ease;
+}
+
+.footer-links a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+.footer-copy {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.75rem;
+  font-family: "Inter", sans-serif;
+  width: 100%;
+  text-align: center;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .reclamation-grid {
+    grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+    gap: 3rem;
+  }
+
+  .reclamation-form-top-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .reclamation-main {
+    padding: 1.5rem 1rem 3rem;
+  }
+
+  .reclamation-form-card {
+    padding: 1.25rem;
+  }
+
+  .reclamation-form {
+    gap: 1.5rem;
+  }
+
+  .reclamation-form-top-row {
+    grid-template-columns: 1fr;
+  }
+
+  .reclamation-submit-wrap {
+    justify-content: stretch;
+  }
+
+  .reclamation-submit-btn {
+    width: 100%;
+  }
+
+  .reclamation-footer-inner {
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1rem;
+  }
+
+  .footer-links {
+    justify-content: center;
+  }
+}
+
+.reclamation-main {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem 1rem 1.5rem;
+}
+
+.reclamation-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.reclamation-left {
+  min-width: 0;
+}
+
+.reclamation-header {
+  margin-bottom: 1.5rem;
+}
+
+.reclamation-title {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.25rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #191c1d;
+  letter-spacing: -0.02em;
+}
+
+.reclamation-subtitle {
+  margin: 0.6rem 0 0;
+  font-size: 1rem;
+  color: #374151;
+  max-width: 760px;
+}
+
+.reclamation-alert,
+.reclamation-rh-status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.85rem;
+  padding: 0.8rem 1rem;
+  border-radius: 10px;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.reclamation-alert-success,
+.reclamation-rh-status.ok {
+  background: #ecfdf3;
+  color: #0f5132;
+  border: 1px solid #a7f3d0;
+}
+
+.reclamation-alert-error,
+.reclamation-rh-status.warn {
+  background: #fef2f2;
+  color: #991b1b;
+  border: 1px solid #fecaca;
+}
+
+.reclamation-form-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+}
+
+.reclamation-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.reclamation-form-top-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+.reclamation-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.reclamation-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #475569;
+}
+
+.reclamation-select,
+.reclamation-input,
+.reclamation-textarea {
+  width: 100%;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 0.85rem 0.95rem;
+  font-size: 0.95rem;
+  color: #111827;
+  background: #ffffff;
+  font-family: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reclamation-select:focus,
+.reclamation-input:focus,
+.reclamation-textarea:focus {
+  outline: none;
+  border-color: #7e0008;
+  box-shadow: 0 0 0 3px rgba(126, 0, 8, 0.12);
+}
+
+.reclamation-input,
+.reclamation-select {
+  border-left: none;
+  border-right: none;
+  border-top: none;
+  border-radius: 0;
+  padding-left: 0.1rem;
+  padding-right: 0.1rem;
+}
+
+.reclamation-textarea {
+  resize: vertical;
+  min-height: 140px;
+  background: #f8fafc;
+}
+
+.reclamation-field-invalid {
+  border-color: #ba1a1a !important;
+  box-shadow: 0 0 0 3px rgba(186, 26, 26, 0.12);
+}
+
+.reclamation-field-error {
+  margin: 0.25rem 0 0;
+  color: #ba1a1a;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.reclamation-file-dropzone.reclamation-field-invalid .reclamation-file-overlay {
+  border-color: #ba1a1a;
+  background: #fff5f5;
+  box-shadow: none;
+}
+
+.reclamation-priority-row {
+  display: flex;
+  gap: 0.55rem;
+  flex-wrap: wrap;
+}
+
+.priority-chip {
+  min-width: 88px;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #374151;
+  border-radius: 7px;
+  padding: 0.52rem 0.9rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.priority-chip:hover {
+  border-color: #9ca3af;
+}
+
+.priority-chip.active {
+  border-color: #0f5132;
+  color: #0f5132;
+  background: #f0fdf4;
+}
+
+.reclamation-file-dropzone {
+  position: relative;
+  width: 100%;
+}
+
+.reclamation-file-input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.reclamation-file-overlay {
+  border: 2px dashed #e5d3d0;
+  border-radius: 10px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.25rem;
+  text-align: center;
+  color: #4b5563;
+  background: #fffdfd;
+  transition: all 0.2s ease;
+  padding: 1rem;
+  position: relative;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.reclamation-file-dropzone:hover .reclamation-file-overlay {
+  border-color: #7e0008;
+  background: #fff7f7;
+  box-shadow: 0 4px 12px rgba(126, 0, 8, 0.1);
+}
+
+.reclamation-file-overlay .material-symbols-outlined {
+  color: #7e0008;
+  font-size: 2.5rem;
+  line-height: 2.5rem;
+  display: block;
+  text-align: center;
+  margin-bottom: 0.25rem;
+}
+
+.reclamation-file-overlay p {
+  margin: 0;
+  font-weight: 700;
+}
+
+.reclamation-file-overlay span {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.reclamation-submit-wrap {
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 0.2rem;
+}
+
+.reclamation-submit-btn {
+  border: none;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #7e0008 0%, #a31919 100%);
+  color: #ffffff;
+  font-size: 1.03rem;
+  font-weight: 800;
+  padding: 0.9rem 1.6rem;
+  min-width: 290px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  box-shadow: 0 10px 24px rgba(126, 0, 8, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.reclamation-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(126, 0, 8, 0.26);
+}
+
+.reclamation-submit-btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.reclamation-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sidebar-card {
+  border-radius: 10px;
+  padding: 1.2rem;
+  border: 1px solid #e5e7eb;
+}
+
+.tips-card {
+  background: #f0fdf4;
+  border-color: #dcfce7;
+}
+
+.trust-card {
+  background: #ffffff;
+}
+
+.sidebar-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.8rem;
+}
+
+.sidebar-card-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #1f2937;
+}
+
+.tips-card .sidebar-card-header svg {
+  color: #166534;
+}
+
+.trust-card .sidebar-card-header svg {
+  color: #7e0008;
+}
+
+.tips-card ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.tips-card li {
+  display: flex;
+  gap: 0.55rem;
+}
+
+.tips-card li span {
+  color: #166534;
+  font-weight: 800;
+  font-size: 0.82rem;
+}
+
+.tips-card li p,
+.trust-card p {
+  margin: 0;
+  color: #475569;
+  font-size: 0.9rem;
+  line-height: 1.55;
+}
+
+.policy-link {
+  margin-top: 0.65rem;
+  border: none;
+  background: transparent;
+  color: #7e0008;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.reclamation-history-section {
+  margin-top: 2rem;
+}
+
+.history-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.8rem;
+}
+
+.history-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #111827;
+}
+
+.reclamation-refresh-btn {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+  color: #7e0008;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reclamation-history-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1rem;
+}
+
+.history-card {
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0.95rem;
+}
+
+.history-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.8rem;
+}
+
+.history-top h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #0f172a;
+}
+
+.history-type {
+  margin: 0.2rem 0 0;
+  color: #6b7280;
+  font-size: 0.82rem;
+}
+
+.history-description {
+  margin: 0.7rem 0;
+  color: #374151;
+  font-size: 0.9rem;
+}
+
+.history-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.8rem;
+  margin-top: 0.2rem;
+  color: #64748b;
+  font-size: 0.8rem;
+}
+
+.reclamation-priority-badge {
+  padding: 0.24rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.reclamation-priority-low {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.reclamation-priority-medium {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.reclamation-priority-high,
+.reclamation-priority-urgent {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.reclamation-badge {
+  padding: 0.24rem 0.55rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.reclamation-badge-resolved {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.reclamation-badge-progress {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.reclamation-badge-pending {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.history-attachment {
+  margin-top: 0.55rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  color: #7e0008;
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+
+.history-response {
+  margin-top: 0.55rem;
+  padding: 0.6rem;
+  border-radius: 8px;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+}
+
+.history-response strong {
+  color: #0f172a;
+  font-size: 0.82rem;
+}
+
+.history-response p {
+  margin: 0.25rem 0 0;
+  color: #475569;
+  font-size: 0.85rem;
+}
+
+.reclamation-loading,
+.reclamation-empty-state {
+  min-height: 120px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 10px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  color: #64748b;
+}
+
+.reclamation-footer {
+  margin-top: 2rem;
+  background: #7e0008;
+  color: #fff;
+}
+
+.reclamation-footer-inner {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 1.15rem 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-brand {
+  font-weight: 800;
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-links a {
+  color: rgba(255, 255, 255, 0.88);
+  text-decoration: none;
+  font-size: 0.82rem;
+}
+
+.footer-copy {
+  color: rgba(255, 255, 255, 0.75);
+  font-size: 0.75rem;
+}
+
+.spinning {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .reclamation-main {
+    padding-top: 2.4rem;
+  }
+
+  .reclamation-grid {
+    grid-template-columns: minmax(0, 2fr) minmax(300px, 1fr);
+    gap: 1.8rem;
+  }
+
+  .reclamation-form-top-row {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .reclamation-main {
+    padding: 1.4rem 0.75rem 1rem;
+  }
+
+  .reclamation-submit-btn {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .reclamation-footer-inner {
+    justify-content: center;
+    text-align: center;
+  }
+}

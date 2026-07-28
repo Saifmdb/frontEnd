@@ -1,0 +1,279 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap');
+
+:root {
+  --primary: #7e0008;
+  --primary-light: #a31919;
+  --secondary: #3f6653;
+  --on-surface: #191c1d;
+  --on-surface-variant: #5a403e;
+  --surface: #f8f9fa;
+  --surface-container-lowest: #ffffff;
+  --outline-variant: #e2beba;
+  --on-secondary-container: #274e3d;
+  --on-error-container: #93000a;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+.avance-page {
+  min-height: 100vh;
+  background: var(--surface);
+  color: var(--on-surface);
+  font-family: 'Inter', sans-serif;
+}
+
+.avance-main {
+  max-width: 1152px;
+  margin: 0 auto;
+  padding: 140px 24px 80px;
+}
+
+/* ── Header ─────────────────────────────────────────── */
+.avance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 40px;
+  margin-bottom: 48px;
+}
+
+.avance-header-left { max-width: 640px; }
+
+.avance-title {
+  font-family: 'Manrope', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--on-surface);
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+}
+
+.avance-title-red { color: var(--primary); }
+
+.avance-desc {
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--on-surface-variant);
+  opacity: 0.9;
+}
+
+/* ── Badge ──────────────────────────────────────────── */
+.avance-badge {
+  background: var(--surface-container-lowest);
+  border-radius: 14px;
+  padding: 24px 28px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  border: 1px solid rgba(226,190,186,0.15);
+  flex-shrink: 0;
+  min-width: 200px;
+}
+
+.avance-badge-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-surface-variant);
+  opacity: 0.55;
+  margin-bottom: 10px;
+}
+
+.avance-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avance-badge-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--secondary);
+}
+
+.avance-badge-text {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--secondary);
+}
+
+.avance-badge-note {
+  margin-top: 8px;
+  font-size: 0.65rem;
+  font-style: italic;
+  color: var(--on-surface-variant);
+  line-height: 1.4;
+}
+
+/* ── Messages ───────────────────────────────────────── */
+.avance-msg {
+  margin-bottom: 24px;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 0.92rem;
+}
+
+.avance-msg.success {
+  background: rgba(63,102,83,0.12);
+  color: var(--on-secondary-container);
+}
+
+.avance-msg.error {
+  background: rgba(186,26,26,0.12);
+  color: var(--on-error-container);
+}
+
+/* ── Rules ──────────────────────────────────────────── */
+.avance-rules {
+  margin-bottom: 24px;
+  padding: 18px 24px;
+  background: var(--surface-container-lowest);
+  border-radius: 14px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.04);
+}
+
+.avance-rule {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 0;
+  font-size: 0.88rem;
+}
+
+.avance-rule.ok { color: var(--on-secondary-container); }
+.avance-rule.fail { color: var(--on-error-container); }
+
+/* ── Card ───────────────────────────────────────────── */
+.avance-card {
+  background: var(--surface-container-lowest);
+  border-radius: 16px;
+  box-shadow: 0 12px 32px rgba(25,28,29,0.06);
+  border: 1px solid rgba(226,190,186,0.1);
+  overflow: hidden;
+}
+
+.avance-card-head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 32px 48px;
+  border-bottom: 1px solid rgba(226,190,186,0.15);
+}
+
+.avance-card-head .material-symbols-outlined {
+  color: var(--primary);
+  font-size: 2rem;
+}
+
+.avance-card-head h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--on-surface);
+}
+
+.avance-card-body {
+  padding: 40px 48px 48px;
+}
+
+/* ── Fields ─────────────────────────────────────────── */
+.avance-fields {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.avance-field { display: flex; flex-direction: column; }
+
+.avance-label {
+  font-family: 'Manrope', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--primary);
+  margin-bottom: 12px;
+}
+
+.avance-input-wrap {
+  position: relative;
+  border-bottom: 2px solid rgba(142,112,108,0.3);
+  transition: border-color 0.2s;
+}
+
+.avance-input-wrap:focus-within {
+  border-color: var(--primary);
+}
+
+.avance-input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  outline: none;
+  padding: 16px 40px 16px 0;
+  font-size: 1.1rem;
+  font-family: 'Inter', sans-serif;
+  color: var(--on-surface);
+}
+
+.avance-input::placeholder { color: var(--on-surface-variant); opacity: 0.45; }
+
+.avance-input-icon {
+  position: absolute;
+  right: 4px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--on-surface-variant);
+  pointer-events: none;
+}
+
+.avance-note {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--primary);
+  line-height: 1.6;
+  max-width: 360px;
+}
+
+/* ── Button ─────────────────────────────────────────── */
+.avance-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 56px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(226,190,186,0.15);
+}
+
+.avance-btn-submit {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+  color: #fff;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 700;
+  font-size: 1.05rem;
+  padding: 18px 48px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(126,0,8,0.22);
+  transition: all 0.2s;
+  min-width: 280px;
+}
+
+.avance-btn-submit:hover:not(:disabled) { transform: scale(1.02); }
+.avance-btn-submit:active:not(:disabled) { transform: scale(0.98); }
+.avance-btn-submit:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
+
+/* ── Responsive ─────────────────────────────────────── */
+@media (max-width: 768px) {
+  .avance-header { flex-direction: column; align-items: flex-start; }
+  .avance-fields { grid-template-columns: 1fr; }
+  .avance-main { padding-inline: 16px; }
+  .avance-card-head { padding: 24px 24px; }
+  .avance-card-body { padding: 28px 24px 36px; }
+  .avance-btn-submit { width: 100%; }
+}

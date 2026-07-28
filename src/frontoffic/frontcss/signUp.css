@@ -1,0 +1,488 @@
+/* ============================================================================
+   AUTH CONTAINER & LAYOUT
+   ============================================================================ */
+
+.auth-container {
+  width: 100%;
+  min-height: 100vh;
+  background: white;
+  color: #2d3748;
+  font-family: "Inter", sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.auth-main {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1rem;
+  background: white;
+}
+
+.auth-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  max-width: 1000px;
+  width: 100%;
+  align-items: center;
+}
+
+/* ============================================================================
+   SIGN UP FORM SECTION
+   ============================================================================ */
+
+.auth-form-section {
+  display: flex;
+  justify-content: center;
+}
+
+.form-card {
+  background: #f5f5f5;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  width: 100%;
+  max-width: 380px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.form-card::-webkit-scrollbar {
+  width: 6px;
+}
+
+.form-card::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.form-card::-webkit-scrollbar-thumb {
+  background: #cbd5e0;
+  border-radius: 3px;
+}
+
+.form-card::-webkit-scrollbar-thumb:hover {
+  background: #a0aec0;
+}
+
+.form-title {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #8b1f31;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+/* ============================================================================
+   AUTH FORM STYLES
+   ============================================================================ */
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #2d3748;
+  font-size: 0.9rem;
+}
+
+.form-input {
+  padding: 0.7rem 0.875rem;
+  border: 2px solid #d1d5db;
+  border-radius: 0.5rem;
+  font-size: 0.9rem;
+  font-family: inherit;
+  transition: all 0.3s ease;
+  background: white;
+  color: #2d3748;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #8b1f31;
+  box-shadow: 0 0 0 3px rgba(139, 31, 49, 0.1);
+}
+
+.form-input::placeholder {
+  color: #a0aec0;
+}
+
+/* ============================================================================
+   PASSWORD INPUT WRAPPER & TOGGLE
+   ============================================================================ */
+
+.password-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.password-input-wrapper .form-input {
+  padding-right: 2.5rem;
+  width: 100%;
+}
+
+.password-toggle-btn {
+  position: absolute;
+  right: 0.75rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #718096;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+  padding: 0.25rem;
+  border-radius: 0.25rem;
+}
+
+.password-toggle-btn:hover {
+  color: #8b1f31;
+}
+
+.password-toggle-btn:focus {
+  outline: 2px solid #8b1f31;
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+   AUTH BUTTONS
+   ============================================================================ */
+
+.btn-signup {
+  padding: 0.875rem 1.5rem;
+  background: linear-gradient(135deg, #8b1f31 0%, #6b1725 100%);
+  color: white;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(139, 31, 49, 0.25);
+  margin-top: 0.5rem;
+}
+
+.btn-signup:hover {
+  background: linear-gradient(135deg, #6b1725 0%, #4d100a 100%);
+  box-shadow: 0 6px 16px rgba(139, 31, 49, 0.35);
+  transform: translateY(-2px);
+}
+
+.btn-signup:active {
+  transform: translateY(0);
+}
+
+/* ============================================================================
+   AUTH FOOTER & LINKS
+   ============================================================================ */
+
+.auth-footer {
+  text-align: center;
+  margin-top: 1.25rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.auth-link-text {
+  font-size: 0.85rem;
+  color: #4b5563;
+}
+
+.auth-link {
+  color: #8b1f31;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.auth-link:hover {
+  color: #dc2626;
+}
+
+.auth-link::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #dc2626;
+  transition: width 0.3s ease;
+}
+
+.auth-link:hover::after {
+  width: 100%;
+}
+
+/* ============================================================================
+   CIRCULAR LOGO SECTION (Hero Style)
+   ============================================================================ */
+
+.hero-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+}
+
+.circular-logo-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.circular-logo-rings {
+  position: absolute;
+  inset: 0;
+  border: 2px solid #dc2626;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.circular-logo-dashed {
+  position: absolute;
+  inset: 0;
+  border: 2px dashed rgba(220, 38, 38, 0.3);
+  border-radius: 50%;
+  animation: spin 20s linear infinite reverse;
+}
+
+.circular-logo {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  background: linear-gradient(135deg, rgba(220, 38, 38, 0.1) 0%, rgba(196, 16, 48, 0.05) 100%);
+  border: 4px solid #dc2626;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 8px rgba(220, 38, 38, 0.12), 0 20px 60px rgba(220, 38, 38, 0.28);
+  z-index: 10;
+  text-align: center;
+}
+
+.logo-content {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: #dc2626;
+  letter-spacing: 2px;
+}
+
+.logo-subtext-circle {
+  font-size: 0.7rem;
+  color: #dc2626;
+  letter-spacing: 0.1em;
+  margin-top: 0.25rem;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ============================================================================
+   HEADER & NAVIGATION (Shared with home)
+   ============================================================================ */
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: white;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.top-bar {
+  background: #dc2626;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 1rem;
+  gap: 1rem;
+}
+
+.icon-button {
+  background: none;
+  border: none;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s;
+}
+
+.icon-button:hover {
+  opacity: 0.8;
+}
+
+.navbar {
+  background: white;
+  border-bottom: 1px solid #d1d5db;
+}
+
+.navbar-container {
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 5rem;
+}
+
+.logo {
+  text-align: center;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 5rem;
+  text-decoration: none;
+  transition: opacity 0.3s;
+}
+
+.logo:hover {
+  opacity: 0.8;
+}
+
+.logo-image {
+  height: 3rem;
+  width: auto;
+  max-width: 150px;
+  object-fit: contain;
+}
+
+.nav-links {
+  display: none;
+  gap: 2rem;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  color: #1f2937;
+  font-weight: 500;
+  cursor: pointer;
+  transition: color 0.3s;
+  font-size: 0.875rem;
+  text-decoration: none;
+}
+
+.nav-link:hover {
+  color: #dc2626;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+  .auth-wrapper {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .auth-logo-section {
+    order: -1;
+  }
+
+  .auth-logo-circle {
+    width: 220px;
+    height: 220px;
+  }
+
+  .form-card {
+    padding: 2rem;
+    max-width: 100%;
+    max-height: none;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+  }
+
+  .auth-main {
+    padding: 2rem 1rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .form-card {
+    padding: 1.5rem;
+  }
+
+  .form-title {
+    font-size: 1.35rem;
+  }
+
+  .auth-form {
+    gap: 0.9rem;
+  }
+
+  .form-group {
+    gap: 0.3rem;
+  }
+
+  .form-label {
+    font-size: 0.85rem;
+  }
+
+  .form-input {
+    padding: 0.6rem 0.75rem;
+    font-size: 0.85rem;
+  }
+
+  .auth-logo-circle {
+    width: 180px;
+    height: 180px;
+  }
+
+  .navbar-container {
+    height: 4rem;
+  }
+
+  .logo-image {
+    height: 2.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .nav-links {
+    display: flex;
+  }
+}

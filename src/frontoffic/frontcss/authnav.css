@@ -1,0 +1,107 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&family=Inter:wght@400;500;600&display=swap");
+
+.auth-nav-wrapper {
+  position: sticky;
+  top: 0;
+  z-index: 80;
+  background: rgba(255, 255, 255, 0.82);
+  backdrop-filter: blur(12px);
+}
+
+.auth-nav-bar {
+  width: 100%;
+}
+
+.auth-nav-inner {
+  max-width: 1536px;
+  margin: 0 auto;
+  padding: 0.9rem 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.auth-nav-brand {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.auth-nav-brand:hover {
+  opacity: 0.8;
+}
+
+.auth-nav-brand-name {
+  font-family: "Manrope", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #7e0008;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: nowrap;
+}
+
+.auth-nav-brand-sub {
+  font-size: 0.55rem;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: #9ca3af;
+  white-space: nowrap;
+}
+
+.auth-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.auth-nav-link {
+  border: 0;
+  background: transparent;
+  color: #1f2937;
+  font-size: 0.82rem;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: "Inter", sans-serif;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  position: relative;
+  padding: 0;
+  outline: none;
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.auth-nav-link:hover {
+  color: #7e0008;
+}
+
+.auth-nav-link:focus,
+.auth-nav-link:active,
+.auth-nav-link:focus-visible {
+  outline: none;
+  box-shadow: none;
+  border: 0;
+}
+
+.auth-nav-divider {
+  width: 100%;
+  height: 1px;
+  background: rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 900px) {
+  .auth-nav-inner {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .auth-nav-brand {
+    width: 100%;
+    text-align: center;
+  }
+}

@@ -1,0 +1,162 @@
+version: '3.8'
+
+services:
+  # Base de données PostgreSQL
+  db:
+    image: postgres:15
+    container_name: projchat_db_prod
+    environment:
+      POSTGRES_DB: honoris_chatbot_prod
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data_prod:/var/lib/postgresql/data
+      - ./backups:/backups
+    networks:
+      - projchat_network
+    restart: unless-stopped
+
+  # Backend Django
+  backend:
+    image: registry.honoris.com/projchat-backend:${TAG:-latest}
+    container_name: projchat_backend_prod
+    environment:
+      - DEBUG=False
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/honoris_chatbot_prod
+      - ALLOWED_HOSTS=${ALLOWED_HOSTS}
+      - SECRET_KEY=${SECRET_KEY}
+      - OLLAMA_API_URL=http://ollama:11434
+      - REDIS_URL=redis://redis:6379/0
+    volumes:
+      - media_files:/app/media
+      - static_files:/app/static
+      - ./logs:/app/logs
+    depends_on:
+      - db
+      - redis
+    networks:
+      - projchat_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+  # Frontend React (servi par Nginx)
+  nginx:
+    image: registry.honoris.com/projchat-nginx:${TAG:-latest}
+    container_name: projchat_nginx_prod
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.prod.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+      - static_files:/app/static
+      - media_files:/app/media
+    depends_on:
+      - backend
+    networks:
+      - projchat_network
+    restart: unless-stopped
+
+  # Ollama pour le LLM
+  ollama:
+    image: ollama/ollama:latest
+    container_name: projchat_ollama_prod
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - projchat_network
+    restart: unless-stopped
+    command: ollama serve
+
+  # Redis pour le cache et les sessions
+  redis:
+    image: redis:7-alpine
+    container_name: projchat_redis_prod
+    volumes:
+      - redis_data:/data
+      - ./redis/redis.conf:/usr/local/etc/redis/redis.conf
+    networks:
+      - projchat_network
+    restart: unless-stopped
+    command: redis-server /usr/local/etc/redis/redis.conf
+
+  # Celery Worker pour les tâches de fond
+  celery:
+    image: registry.honoris.com/projchat-backend:${TAG:-latest}
+    container_name: projchat_celery_prod
+    environment:
+      - DEBUG=False
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/honoris_chatbot_prod
+      - REDIS_URL=redis://redis:6379/0
+      - OLLAMA_API_URL=http://ollama:11434
+    depends_on:
+      - db
+      - redis
+    networks:
+      - projchat_network
+    restart: unless-stopped
+    command: celery -A chatbot worker -l info
+
+  # Celery Beat pour les tâches planifiées
+  celery-beat:
+    image: registry.honoris.com/projchat-backend:${TAG:-latest}
+    container_name: projchat_celery_beat_prod
+    environment:
+      - DEBUG=False
+      - DATABASE_URL=postgresql://postgres:${POSTGRES_PASSWORD}@db:5432/honoris_chatbot_prod
+      - REDIS_URL=redis://redis:6379/0
+    depends_on:
+      - db
+      - redis
+    volumes:
+      - ./celerybeat-schedule:/app/celerybeat-schedule
+    networks:
+      - projchat_network
+    restart: unless-stopped
+    command: celery -A chatbot beat -l info
+
+  # Monitoring avec Prometheus (optionnel)
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: projchat_prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - projchat_network
+    restart: unless-stopped
+
+  # Grafana pour les dashboards (optionnel)
+  grafana:
+    image: grafana/grafana:latest
+    container_name: projchat_grafana
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=${GRAFANA_PASSWORD}
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    networks:
+      - projchat_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data_prod:
+  media_files:
+  static_files:
+  ollama_data:
+  redis_data:
+  prometheus_data:
+  grafana_data:
+
+networks:
+  projchat_network:
+    driver: bridge

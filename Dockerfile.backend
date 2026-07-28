@@ -1,0 +1,39 @@
+# Dockerfile simplifié pour le backend
+FROM python:3.11-slim
+
+# Labels pour Docker Hub
+LABEL maintainer="saifmed"
+LABEL description="Backend Django pour Honoris Chatbot"
+LABEL version="1.0"
+
+# Définir le répertoire de travail
+WORKDIR /app
+
+# Installer les dépendances système
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copier les fichiers de dépendances Python
+COPY backend/requirements.txt .
+
+# Installer les dépendances Python
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copier le code du backend
+COPY backend/ .
+
+# Créer les répertoires nécessaires
+RUN mkdir -p /app/media /app/static /app/logs
+
+# Exposer le port du backend
+EXPOSE 8000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
+  CMD curl -f http://localhost:8000/api/health/ || exit 1
+
+# Commande pour démarrer le backend
+CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]

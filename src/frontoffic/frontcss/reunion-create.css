@@ -1,0 +1,486 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;600;700;800&family=Inter:wght@400;500;600;700&display=swap");
+
+.meeting-page {
+  min-height: 100vh;
+  background:
+    radial-gradient(circle at 8% 10%, rgba(126, 0, 8, 0.07), transparent 36%),
+    radial-gradient(circle at 92% 4%, rgba(30, 64, 175, 0.08), transparent 34%),
+    #f3f4f6;
+  color: #161a1d;
+  display: flex;
+  flex-direction: column;
+  font-family: "Inter", sans-serif;
+}
+
+.meeting-main {
+  width: min(1220px, 100% - 2.4rem);
+  margin: 2rem auto 2.8rem;
+  flex: 1;
+}
+
+.meeting-breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.42rem;
+  color: #6b7280;
+  font-size: 0.85rem;
+}
+
+.meeting-breadcrumb a {
+  text-decoration: none;
+  color: #6b7280;
+}
+
+.meeting-breadcrumb a:hover {
+  color: #7e0008;
+}
+
+.meeting-breadcrumb strong {
+  color: #7e0008;
+  font-weight: 700;
+}
+
+.meeting-header {
+  margin: 1rem 0 1.6rem;
+}
+
+.meeting-header h1 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+  font-size: clamp(1.9rem, 3.4vw, 3rem);
+  line-height: 1.12;
+  letter-spacing: -0.02em;
+}
+
+.meeting-header p {
+  margin: 0.7rem 0 0;
+  max-width: 780px;
+  color: #4b5563;
+  line-height: 1.65;
+  font-size: 1rem;
+}
+
+.meeting-alert {
+  border-radius: 12px;
+  padding: 0.82rem 1rem;
+  margin-bottom: 1rem;
+  font-size: 0.94rem;
+}
+
+.meeting-alert.error {
+  background: #fee2e2;
+  color: #9f1239;
+  border: 1px solid #fecaca;
+}
+
+.meeting-alert.success {
+  background: #dcfce7;
+  color: #166534;
+  border: 1px solid #bbf7d0;
+}
+
+.meeting-alert a {
+  color: inherit;
+  font-weight: 700;
+}
+
+.meeting-layout {
+  display: grid;
+  grid-template-columns: 1.7fr 0.9fr;
+  gap: 1.6rem;
+}
+
+.meeting-form-card {
+  background: rgba(255, 255, 255, 0.83);
+  border: 1px solid rgba(126, 0, 8, 0.12);
+  border-radius: 16px;
+  box-shadow: 0 26px 48px rgba(15, 23, 42, 0.08);
+  padding: 1.35rem 1.25rem;
+  display: grid;
+  gap: 1rem;
+}
+
+.meeting-guide-box {
+  border: 1px solid #e4d5d3;
+  background: #fff9f8;
+  color: #5b3a36;
+  border-radius: 10px;
+  padding: 0.72rem 0.82rem;
+  font-size: 0.82rem;
+  line-height: 1.45;
+}
+
+.meeting-guide-box strong {
+  color: #7e0008;
+}
+
+.meeting-form-card label > span {
+  display: block;
+  margin-bottom: 0.42rem;
+  text-transform: uppercase;
+  letter-spacing: 0.085em;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #5b3a36;
+}
+
+.meeting-form-card input,
+.meeting-form-card textarea {
+  width: 100%;
+  border: 0;
+  border-bottom: 2px solid #ddc8c6;
+  background: transparent;
+  color: #111827;
+  font: inherit;
+  padding: 0.64rem 0.1rem;
+  transition: border-color 0.22s ease;
+}
+
+.meeting-form-card input.meeting-field-invalid,
+.meeting-form-card textarea.meeting-field-invalid {
+  border-color: #dc2626;
+  background: #fff7f7;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.meeting-field-error {
+  margin: 0.35rem 0 0;
+  color: #b42318;
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1.35;
+}
+
+.meeting-form-card textarea {
+  resize: vertical;
+  border: 1px solid #e5d9d7;
+  border-radius: 10px;
+  padding: 0.7rem 0.8rem;
+  min-height: 130px;
+  background: #f8fafc;
+}
+
+.meeting-form-card input:focus,
+.meeting-form-card textarea:focus {
+  outline: none;
+  border-color: #7e0008;
+}
+
+.field-with-icon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.field-with-icon svg {
+  color: #6b7280;
+  flex-shrink: 0;
+}
+
+.meeting-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.meeting-grid-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.meeting-participants-list {
+  max-height: 200px;
+  overflow: auto;
+  border: 1px solid #eadfdd;
+  border-radius: 12px;
+  background: #fff;
+}
+
+.meeting-participants-state {
+  margin: 0;
+  padding: 0.72rem 0.8rem;
+  font-size: 0.95rem;
+  color: #6b7280;
+}
+
+.meeting-participants-state.is-loading {
+  color: #4b5563;
+  font-weight: 600;
+}
+
+.meeting-participants-state.is-empty {
+  color: #7e0008;
+  font-weight: 600;
+}
+
+.meeting-participant-item {
+  display: flex;
+  gap: 0.65rem;
+  align-items: flex-start;
+  padding: 0.7rem 0.8rem;
+  border-bottom: 1px solid #f0e7e6;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-left-color 0.2s ease;
+  border-left: 3px solid transparent;
+}
+
+.meeting-participant-item:last-child {
+  border-bottom: none;
+}
+
+.meeting-participant-item:hover {
+  background: #f8fafc;
+}
+
+.meeting-participant-item.is-selected {
+  background: linear-gradient(90deg, #fff6f6 0%, #ffffff 82%);
+  border-left-color: #a31919;
+}
+
+.meeting-form-card input.meeting-participant-checkbox {
+  width: 16px;
+  min-width: 16px;
+  height: 16px;
+  margin-top: 0.2rem;
+  margin-right: 0.1rem;
+  padding: 0;
+  border: 0;
+  border-bottom: 0;
+  background: transparent;
+  box-shadow: none;
+  flex: 0 0 auto;
+  accent-color: #a31919;
+}
+
+.meeting-form-card input.meeting-participant-checkbox:focus {
+  outline: 2px solid rgba(163, 25, 25, 0.25);
+  outline-offset: 2px;
+  border: 0;
+  border-bottom: 0;
+}
+
+.meeting-participant-meta {
+  min-width: 0;
+}
+
+.meeting-participant-name {
+  display: block;
+  font-size: 0.92rem;
+}
+
+.meeting-participant-email {
+  color: #6b7280;
+}
+
+.meeting-participants-count {
+  margin: 0;
+  font-size: 0.82rem;
+  color: #7e0008;
+  font-weight: 700;
+}
+
+.meeting-participants-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.meeting-participants-chip {
+  border: 1px solid #e6d4d1;
+  background: #fff;
+  border-radius: 999px;
+  padding: 0.38rem 0.7rem;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: #1f2937;
+  transition: border-color 0.18s ease, color 0.18s ease;
+}
+
+.meeting-participants-chip:hover {
+  border-color: #a31919;
+  color: #7e0008;
+}
+
+.meeting-participants-chip-close {
+  margin-left: 0.3rem;
+  color: #7e0008;
+  font-weight: 700;
+}
+
+.meeting-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  margin-top: 0.2rem;
+}
+
+.btn-cancel {
+  border: none;
+  background: transparent;
+  color: #4b5563;
+  font-weight: 700;
+  cursor: pointer;
+  padding: 0.75rem 0.9rem;
+}
+
+.btn-primary {
+  border: none;
+  background: linear-gradient(145deg, #7e0008, #a31919);
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 700;
+  padding: 0.78rem 1.3rem;
+  cursor: pointer;
+  box-shadow: 0 12px 28px rgba(126, 0, 8, 0.22);
+}
+
+.btn-primary:disabled {
+  opacity: 0.7;
+  cursor: wait;
+}
+
+.meeting-sidebar {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+}
+
+.tips-card {
+  background: rgba(17, 24, 39, 0.04);
+  border-radius: 14px;
+  padding: 1rem;
+  border: 1px solid rgba(100, 116, 139, 0.2);
+}
+
+.tips-card h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: "Manrope", sans-serif;
+}
+
+.tips-card ul {
+  margin: 0.8rem 0 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.tips-card li {
+  display: grid;
+  grid-template-columns: 24px 1fr;
+  gap: 0.55rem;
+}
+
+.tips-card li span {
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  background: #fff;
+  border: 1px solid #e7d8d6;
+  color: #7e0008;
+  font-size: 0.72rem;
+  font-weight: 700;
+}
+
+.tips-card li p {
+  margin: 0;
+  font-size: 0.84rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.hero-promo-card {
+  border-radius: 14px;
+  overflow: hidden;
+  min-height: 260px;
+  position: relative;
+  box-shadow: 0 20px 34px rgba(15, 23, 42, 0.17);
+}
+
+.hero-promo-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-promo-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(9, 12, 24, 0.78), rgba(9, 12, 24, 0.04));
+}
+
+.hero-promo-card div {
+  position: absolute;
+  left: 0.85rem;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  color: #fff;
+  z-index: 1;
+}
+
+.hero-promo-card h4 {
+  margin: 0;
+  font-family: "Manrope", sans-serif;
+}
+
+.hero-promo-card p {
+  margin: 0.2rem 0 0;
+  font-size: 0.82rem;
+  opacity: 0.88;
+}
+
+.meeting-footer {
+  background: #e5e7eb;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.1rem 1.3rem;
+  font-size: 0.8rem;
+  color: #374151;
+}
+
+.meeting-footer div {
+  display: flex;
+  gap: 0.8rem;
+}
+
+.meeting-footer a {
+  text-decoration: none;
+  color: #374151;
+}
+
+@media (max-width: 1080px) {
+  .meeting-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-promo-card {
+    min-height: 220px;
+  }
+}
+
+@media (max-width: 700px) {
+  .meeting-main {
+    width: min(1220px, 100% - 1rem);
+  }
+
+  .meeting-grid-3,
+  .meeting-grid-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .meeting-footer {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

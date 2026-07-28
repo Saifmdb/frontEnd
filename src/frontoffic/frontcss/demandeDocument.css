@@ -1,0 +1,233 @@
+/* demandeDocument.css - Styles spécifiques pour la page de demande de document RH */
+
+.demande-doc-main {
+  min-height: 100vh;
+  background: #f8f9fa;
+  color: #191c1d;
+  font-family: 'Inter', sans-serif;
+}
+
+.demande-doc-header {
+  margin-bottom: 2.5rem;
+}
+
+.demande-doc-title {
+  font-size: 3rem;
+  font-weight: 800;
+  margin-bottom: 1rem;
+  font-family: 'Manrope', sans-serif;
+}
+
+.demande-doc-desc {
+  font-size: 1.125rem;
+  color: #5a403e;
+  max-width: 32rem;
+  line-height: 1.6;
+}
+
+.demande-doc-form {
+  background: #fff;
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 1px 4px rgba(25,28,29,0.06);
+  border: 1px solid #e2beba1a;
+}
+
+.demande-doc-success {
+  color: #15803d;
+  font-weight: bold;
+  font-size: 1.125rem;
+}
+
+.demande-doc-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 1rem;
+}
+
+
+.custom-select {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #7e0008;
+  padding: 1rem 0;
+  font-size: 1.125rem;
+  font-weight: 500;
+  transition: border 0.2s;
+  outline: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.custom-select:focus {
+  outline: none;
+  border-color: #a31919;
+}
+
+.custom-select option {
+  background: #fff;
+  color: #191c1d;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+}
+
+/* Style le dropdown du select (pour Chrome) */
+select.custom-select::-ms-expand {
+  display: none;
+}
+
+select.custom-select::-webkit-scrollbar {
+  width: 8px;
+  background: #f3f4f5;
+}
+select.custom-select:focus option:checked {
+  background: #ffb4ab;
+  color: #7e0008;
+}
+
+/* Ajouté pour le select custom dans GestionDemDocument.jsx */
+.custom-select-status {
+  appearance: none !important;
+  -webkit-appearance: none !important;
+  -moz-appearance: none !important;
+  background-color: #f8f9fa;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.5rem;
+  padding-right: 2.5rem !important;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #334155;
+  transition: border-color 0.2s;
+  background-image: none !important;
+  box-shadow: none !important;
+}
+.custom-select-status:focus {
+  outline: none;
+  border-color: #7e0008;
+  box-shadow: 0 0 0 2px #7e000833;
+  background-image: none !important;
+}
+.custom-select-arrow {
+  pointer-events: none;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #94a3b8;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+}
+
+.demande-doc-delivery {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+}
+
+.demande-doc-radio {
+  display: none;
+}
+
+.demande-doc-radio-label {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 2px solid #e7e8e9;
+  transition: background 0.2s, border 0.2s;
+}
+
+.demande-doc-radio:checked + .demande-doc-radio-label {
+  border-color: #7e0008;
+  background: #ffb4ab1a;
+}
+
+.demande-doc-submit {
+  width: 100%;
+  background: linear-gradient(135deg, #7e0008, #a31919);
+  color: #fff;
+  padding: 1.25rem 3.5rem;
+  border-radius: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  box-shadow: 0 2px 8px 0 #7e000820;
+  transition: transform 0.15s;
+}
+
+.demande-doc-submit:hover {
+  transform: scale(1.02);
+}
+
+.demande-doc-alert {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  border-radius: 12px;
+  margin-bottom: 1.25rem;
+  font-size: 0.95rem;
+  border: 1px solid transparent;
+}
+
+.demande-doc-alert-icon {
+  font-size: 1.65rem;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+}
+
+.demande-doc-alert-title {
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+}
+
+.demande-doc-alert-message {
+  line-height: 1.65;
+  color: inherit;
+}
+
+.demande-doc-alert-error {
+  background: #fee2e2;
+  color: #9f1239;
+  border-color: #fecaca;
+}
+
+.demande-doc-alert-success {
+  background: #dcfce7;
+  color: #166534;
+  border-color: #bbf7d0;
+}
+
+.demande-doc-alert-action {
+  margin-left: auto;
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.demande-doc-alert-action:hover {
+  opacity: 0.85;
+}
+
+@media (max-width: 640px) {
+  .demande-doc-delivery {
+    grid-template-columns: 1fr;
+  }
+  .demande-doc-form {
+    padding: 1.25rem;
+  }
+}

@@ -1,0 +1,823 @@
+/* ========== GLOBAL PAGE CONTAINER ========== */
+.gestion-conges-manager-container {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+}
+
+.gestion-conges-manager-content {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+}
+
+/* ========== LOADING ========== */
+.gestion-manager-loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  gap: 1rem;
+}
+
+.gestion-manager-loading-spinner {
+  animation: gestionManagerSpin 1s linear infinite;
+}
+
+@keyframes gestionManagerSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* ========== HEADER SECTION ========== */
+.gestion-manager-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+  animation: gestionManagerSlideDown 0.6s ease-out;
+}
+
+.gestion-manager-title h1 {
+  font-size: clamp(1.75rem, 4vw, 2.4rem);
+  font-weight: 900;
+  color: #1b5e20;
+  margin: 0 0 0.5rem;
+  letter-spacing: -0.5px;
+}
+
+.gestion-manager-subtitle {
+  font-size: 1rem;
+  color: #555;
+  margin: 0;
+  font-weight: 500;
+}
+
+.gestion-manager-header-stats {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+/* ========== REFRESH BUTTON ========== */
+.gestion-manager-refresh-btn {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.gestion-manager-refresh-btn:hover {
+  background: #f0f4f8;
+  border-color: #1b5e20;
+  color: #1b5e20;
+}
+
+/* ========== STAT CARDS ========== */
+.gestion-manager-stat-card {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 1.5rem;
+  border-radius: 1rem;
+  min-width: 160px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  animation: gestionManagerFadeInUp 0.6s ease-out;
+}
+
+.gestion-manager-stat-card.pending-card {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: white;
+}
+
+.gestion-manager-stat-card.approved-card {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+}
+
+.gestion-manager-stat-card.refused-card {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+}
+
+.gestion-manager-stat-badge {
+  font-size: 2rem;
+  font-weight: 700;
+  min-width: 50px;
+}
+
+.gestion-manager-stat-text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.gestion-manager-stat-label {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* ========== ALERTS ========== */
+.gestion-manager-alert {
+  padding: 1rem 1.5rem;
+  border-radius: 0.875rem;
+  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 500;
+  animation: gestionManagerSlideDown 0.4s ease-out;
+}
+
+.gestion-manager-alert-success {
+  background-color: #dcfce7;
+  color: #166534;
+  border: 1px solid #86efac;
+}
+
+.gestion-manager-alert-error {
+  background-color: #fee2e2;
+  color: #991b1b;
+  border: 1px solid #fca5a5;
+}
+
+.gestion-manager-alert button {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s;
+  padding: 0;
+}
+
+.gestion-manager-alert button:hover {
+  opacity: 1;
+}
+
+/* ========== TABS ========== */
+.gestion-manager-tabs-container {
+  display: flex;
+  gap: 0;
+  border-bottom: 2px solid #ddd;
+  margin-bottom: 2rem;
+  animation: gestionManagerFadeInUp 0.6s ease-out 0.1s backwards;
+}
+
+.gestion-manager-tab {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
+  color: #6b7280;
+  font-weight: 500;
+  border-bottom: 3px solid transparent;
+  margin-bottom: -2px;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.gestion-manager-tab:hover {
+  color: #1b5e20;
+}
+
+.gestion-manager-tab.active {
+  color: #1b5e20;
+  border-bottom-color: #1b5e20;
+}
+
+.gestion-manager-tab svg {
+  opacity: 0.7;
+  transition: opacity 0.2s;
+}
+
+.gestion-manager-tab.active svg {
+  opacity: 1;
+}
+
+/* ========== SECTIONS ========== */
+.gestion-manager-demandes-section {
+  animation: gestionManagerFadeInUp 0.6s ease-out 0.2s backwards;
+}
+
+.gestion-manager-section-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #1b5e20;
+  margin: 0 0 1.5rem;
+}
+
+.gestion-manager-no-requests-empty {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: white;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 2px dashed #ddd;
+  color: #6b7280;
+}
+
+.gestion-manager-no-requests-empty svg {
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.gestion-manager-no-requests-empty p {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+/* ========== GRID LAYOUT ========== */
+.gestion-manager-demandes-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1.75rem;
+}
+
+/* ========== DEMANDE CARDS ========== */
+.gestion-manager-demande-card {
+  background: white;
+  border-radius: 1.125rem;
+  overflow: hidden;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  border-left: 4px solid #1b5e20;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.gestion-manager-demande-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 25px rgba(27, 94, 32, 0.15);
+}
+
+.gestion-manager-card-header {
+  background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+  padding: 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  border-bottom: 1px solid #eee;
+  flex-wrap: wrap;
+}
+
+.gestion-manager-demandeur-name {
+  font-weight: 700;
+  color: #1b5e20;
+  font-size: 1.05rem;
+}
+
+/* ========== BADGES ========== */
+.gestion-manager-badge {
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+}
+
+.gestion-manager-badge-warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.gestion-manager-badge-success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.gestion-manager-badge-danger {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.gestion-manager-badge-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.gestion-manager-badge-info {
+  background: #dbeafe;
+  color: #1e40af;
+}
+
+/* ========== CARD BODY ========== */
+.gestion-manager-card-body {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.gestion-manager-demande-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.gestion-manager-demande-info .gestion-manager-label {
+  font-weight: 600;
+  color: #1b5e20;
+  min-width: 70px;
+  font-size: 0.95rem;
+}
+
+.gestion-manager-demande-info .gestion-manager-value {
+  color: #555;
+  flex: 1;
+  text-align: right;
+}
+
+.gestion-manager-demande-info.motif {
+  flex-direction: column;
+}
+
+.gestion-manager-demande-info.motif .gestion-manager-label {
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+
+.gestion-manager-demande-info.motif .gestion-manager-value {
+  background: #f0f4f8;
+  padding: 0.75rem;
+  border-radius: 0.625rem;
+  text-align: left;
+  font-size: 0.9rem;
+  font-style: italic;
+}
+
+/* ========== CARD ACTIONS ========== */
+.gestion-manager-card-actions {
+  padding: 1.25rem;
+  background: #f8f9fa;
+  display: flex;
+  gap: 0.75rem;
+  border-top: 1px solid #eee;
+}
+
+.gestion-manager-btn {
+  flex: 1;
+  padding: 0.65rem 1.25rem;
+  border: none;
+  border-radius: 0.75rem;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.gestion-manager-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.gestion-manager-btn-success {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(16, 185, 129, 0.2);
+}
+
+.gestion-manager-btn-success:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+}
+
+.gestion-manager-btn-danger {
+  background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);
+  color: white;
+  box-shadow: 0 2px 8px rgba(239, 68, 68, 0.2);
+}
+
+.gestion-manager-btn-danger:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+.gestion-manager-btn-secondary {
+  background: #e5e7eb;
+  color: #374151;
+}
+
+.gestion-manager-btn-secondary:hover:not(:disabled) {
+  background: #d1d5db;
+}
+
+/* ========== TABLE ========== */
+.gestion-manager-table-container {
+  overflow-x: auto;
+  border-radius: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+  animation: gestionManagerFadeInUp 0.6s ease-out 0.2s backwards;
+}
+
+.gestion-manager-demandes-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+}
+
+.gestion-manager-demandes-table th,
+.gestion-manager-demandes-table td {
+  padding: 1.25rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+  color: #333;
+}
+
+.gestion-manager-demandes-table th {
+  background: linear-gradient(135deg, #f0f4f8 0%, #e8eef5 100%);
+  font-weight: 700;
+  color: #1b5e20;
+  font-size: 0.95rem;
+}
+
+.gestion-manager-demandes-table tbody tr:hover {
+  background: #f8f9fa;
+}
+
+.gestion-manager-demandes-table tbody td {
+  color: #333;
+}
+
+.gestion-manager-employee-name {
+  font-weight: 600;
+  color: #1b5e20;
+}
+
+.gestion-manager-text-center {
+  text-align: center;
+}
+
+/* ========== MODAL ========== */
+.gestion-manager-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: gestionManagerFadeIn 0.2s ease-out;
+}
+
+@keyframes gestionManagerFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.gestion-manager-modal {
+  background: white;
+  border-radius: 1.125rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  animation: gestionManagerSlideUp 0.3s ease-out;
+}
+
+@keyframes gestionManagerSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gestion-manager-modal-header {
+  padding: 1.75rem;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.gestion-manager-modal-header h3 {
+  margin: 0;
+  color: #1b5e20;
+  font-size: 1.3rem;
+}
+
+.gestion-manager-modal-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: #6b7280;
+  transition: color 0.2s;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gestion-manager-modal-close:hover {
+  color: #1b5e20;
+}
+
+.gestion-manager-modal-body {
+  padding: 1.75rem;
+}
+
+.gestion-manager-modal-body p {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.gestion-manager-modal-body p strong {
+  color: #1b5e20;
+}
+
+.gestion-manager-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.gestion-manager-form-group label {
+  font-weight: 600;
+  color: #1b5e20;
+  font-size: 0.95rem;
+}
+
+.gestion-manager-form-textarea {
+  padding: 0.875rem 1rem;
+  border: 1.5px solid #ddd;
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  font-family: inherit;
+  resize: vertical;
+  transition: all 0.2s ease;
+  background: white;
+  color: #333;
+}
+
+.gestion-manager-form-textarea:focus {
+  outline: none;
+  border-color: #1b5e20;
+  box-shadow: 0 0 0 3px rgba(27, 94, 32, 0.1);
+  background: white;
+  color: #333;
+}
+
+.gestion-manager-modal-footer {
+  padding: 1.75rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+/* ========== ANIMATIONS ========== */
+@keyframes gestionManagerSlideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes gestionManagerFadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+@media (max-width: 1024px) {
+  .gestion-conges-manager-content {
+    padding: 2rem 1.25rem 3rem;
+  }
+
+  .gestion-manager-header {
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .gestion-manager-header-stats {
+    width: 100%;
+    justify-content: flex-start;
+  }
+
+  .gestion-manager-demandes-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+
+  .gestion-manager-tabs-container {
+    overflow-x: auto;
+  }
+
+  .gestion-manager-tab {
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 768px) {
+  .gestion-conges-manager-content {
+    padding: 1.75rem 1rem 3rem;
+  }
+
+  .gestion-manager-header {
+    gap: 1rem;
+  }
+
+  .gestion-manager-header-stats {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .gestion-manager-stat-card {
+    width: 100%;
+    gap: 1rem;
+  }
+
+  .gestion-manager-demandes-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .gestion-manager-card-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gestion-manager-demandeur-name {
+    width: 100%;
+  }
+
+  .gestion-manager-demande-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gestion-manager-demande-info .gestion-manager-value {
+    text-align: left;
+  }
+
+  .gestion-manager-card-actions {
+    flex-direction: column;
+  }
+
+  .gestion-manager-btn {
+    width: 100%;
+  }
+
+  .gestion-manager-demandes-table {
+    font-size: 0.9rem;
+  }
+
+  .gestion-manager-demandes-table th,
+  .gestion-manager-demandes-table td {
+    padding: 0.875rem;
+  }
+
+  .gestion-manager-modal {
+    width: 95%;
+  }
+}
+
+@media (max-width: 480px) {
+  .gestion-conges-manager-content {
+    padding: 1.5rem 0.875rem 2.5rem;
+  }
+
+  .gestion-manager-title h1 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+  }
+
+  .gestion-manager-section-title {
+    font-size: 1.25rem;
+  }
+
+  .gestion-manager-stat-card {
+    min-width: auto;
+    flex: 1;
+    gap: 0.75rem;
+    padding: 1.25rem 1rem;
+  }
+
+  .gestion-manager-stat-badge {
+    font-size: 1.5rem;
+  }
+
+  .gestion-manager-stat-label {
+    font-size: 0.75rem;
+  }
+
+  .gestion-manager-tab {
+    padding: 0.875rem 1rem;
+    font-size: 0.9rem;
+  }
+
+  .gestion-manager-tab svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  .gestion-manager-card-header {
+    padding: 1rem;
+  }
+
+  .gestion-manager-demandeur-name {
+    font-size: 1rem;
+  }
+
+  .gestion-manager-card-body {
+    padding: 1.25rem;
+    gap: 1rem;
+  }
+
+  .gestion-manager-demande-info .gestion-manager-label {
+    min-width: 60px;
+    font-size: 0.85rem;
+  }
+
+  .gestion-manager-demande-info .gestion-manager-value {
+    font-size: 0.9rem;
+  }
+
+  .gestion-manager-badge {
+    padding: 0.4rem 0.75rem;
+    font-size: 0.75rem;
+  }
+
+  .gestion-manager-card-actions {
+    padding: 1rem;
+  }
+
+  .gestion-manager-btn {
+    padding: 0.6rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .gestion-manager-modal {
+    width: 98%;
+  }
+
+  .gestion-manager-modal-header {
+    padding: 1.5rem;
+  }
+
+  .gestion-manager-modal-header h3 {
+    font-size: 1.1rem;
+  }
+
+  .gestion-manager-modal-body {
+    padding: 1.5rem;
+  }
+
+  .gestion-manager-modal-footer {
+    padding: 1.5rem;
+    flex-direction: column-reverse;
+  }
+
+  .gestion-manager-demandes-table {
+    font-size: 0.8rem;
+  }
+
+  .gestion-manager-demandes-table th,
+  .gestion-manager-demandes-table td {
+    padding: 0.65rem;
+  }
+}

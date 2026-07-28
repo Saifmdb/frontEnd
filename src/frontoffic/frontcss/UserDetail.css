@@ -1,0 +1,434 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Inter:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@400&display=swap");
+
+:root {
+  --detail-bg: #f8f9fa;
+  --detail-text: #191c1d;
+  --detail-muted: #5a403e;
+  --detail-primary: #7e0008;
+  --detail-primary-strong: #a31919;
+  --detail-secondary: #3f6653;
+  --detail-card: #ffffff;
+  --detail-card-soft: #f3f4f5;
+}
+
+.detail-page {
+  min-height: 100vh;
+  background: var(--detail-bg);
+  color: var(--detail-text);
+  font-family: "Inter", sans-serif;
+}
+
+.detail-page .material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+}
+
+.detail-main {
+  margin-left: 256px;
+  padding: 48px;
+  min-height: 100vh;
+}
+
+.detail-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 24px;
+  margin-bottom: 40px;
+}
+
+.detail-kicker {
+  color: var(--detail-secondary);
+  font-size: 12px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.detail-header h2 {
+  font-family: "Manrope", sans-serif;
+  font-size: 36px;
+  font-weight: 800;
+  margin: 0;
+}
+
+.detail-edit {
+  border: none;
+  background: var(--detail-primary-strong);
+  color: #ffffff;
+  padding: 14px 28px;
+  border-radius: 14px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 14px 28px rgba(126, 0, 8, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.detail-edit:active {
+  transform: scale(0.98);
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: minmax(260px, 360px) 1fr;
+  gap: 32px;
+}
+
+.detail-left {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detail-right {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.detail-card {
+  background: var(--detail-card);
+  border-radius: 18px;
+  padding: 28px;
+  box-shadow: 0 18px 40px rgba(25, 28, 29, 0.08);
+}
+
+.detail-profile {
+  text-align: center;
+}
+
+.detail-avatar-wrap {
+  position: relative;
+  display: inline-flex;
+  margin-bottom: 20px;
+}
+
+.detail-avatar-wrap img {
+  width: 168px;
+  height: 168px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: #ffffff;
+  box-shadow: 0 18px 32px rgba(25, 28, 29, 0.12);
+  border: 8px solid var(--detail-card-soft);
+}
+
+.detail-verified {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--detail-secondary);
+  border: 4px solid var(--detail-card);
+  display: grid;
+  place-items: center;
+  color: #ffffff;
+}
+
+.detail-profile h3 {
+  font-family: "Manrope", sans-serif;
+  font-size: 24px;
+  margin: 0 0 6px;
+}
+
+.detail-profile p {
+  color: var(--detail-muted);
+  margin: 0 0 20px;
+  font-weight: 600;
+}
+
+.detail-pill-row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+
+.detail-pill-row div {
+  background: #edeeef;
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.detail-pill-row span {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--detail-muted);
+  margin-bottom: 6px;
+  font-weight: 700;
+}
+
+.detail-pill-row strong {
+  font-size: 14px;
+}
+
+.detail-pill-row strong.active {
+  color: var(--detail-secondary);
+}
+
+.detail-pill-row strong.inactive {
+  color: #b91c1c;
+}
+
+.detail-contact {
+  background: var(--detail-card-soft);
+  display: grid;
+  gap: 16px;
+}
+
+.detail-contact > div {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.detail-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: grid;
+  place-items: center;
+  color: var(--detail-primary);
+}
+
+.detail-contact small {
+  display: block;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--detail-muted);
+  margin-bottom: 4px;
+}
+
+.detail-contact strong {
+  font-size: 14px;
+}
+
+.detail-section-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  color: var(--detail-secondary);
+}
+
+.detail-section-title h4 {
+  font-family: "Manrope", sans-serif;
+  font-size: 20px;
+  margin: 0;
+  color: var(--detail-text);
+}
+
+.detail-edit-toggle {
+  margin-left: auto;
+  width: 72px;
+  height: 40px;
+  border-radius: 999px;
+  border: 1px solid #f0f1f2;
+  background: #ffffff;
+  color: transparent;
+  display: flex;
+  align-items: center;
+  padding: 6px;
+  box-shadow: 0 14px 26px rgba(25, 28, 29, 0.16);
+  cursor: pointer;
+  transition: transform 0.2s ease, background 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-toggle-knob {
+  width: 28px;
+  height: 28px;
+  position: absolute;
+  left: 6px;
+  top: 6px;
+  border-radius: 50%;
+  background: #e11313;
+  transition: transform 0.25s ease;
+}
+
+.detail-edit-toggle.is-active {
+  background: #ffffff;
+  color: transparent;
+}
+
+.detail-edit-toggle.is-active .detail-toggle-knob {
+  transform: translateX(32px);
+}
+
+.detail-edit-toggle:active {
+  transform: scale(0.96);
+}
+
+.detail-section-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px 24px;
+}
+
+.detail-section-grid > div {
+  min-width: 0;
+}
+
+.detail-section-grid .full {
+  grid-column: span 2;
+}
+
+.detail-section-grid > div:not(.full) {
+  overflow: hidden;
+}
+
+.detail-section-grid span {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--detail-muted);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.detail-section-grid strong {
+  font-size: 16px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.detail-input {
+  display: flex;
+  flex-direction: column;
+}
+
+.detail-input input,
+.detail-input select {
+  border: none;
+  border-bottom: 2px solid #e1e3e4;
+  background: transparent;
+  padding: 8px 0 10px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--detail-text);
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.detail-input input:focus,
+.detail-input select:focus {
+  border-color: var(--detail-primary);
+}
+
+.detail-input input:disabled,
+.detail-input select:disabled {
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.detail-input select {
+  appearance: none;
+  background-image: linear-gradient(45deg, transparent 50%, #94a3b8 50%),
+    linear-gradient(135deg, #94a3b8 50%, transparent 50%);
+  background-position: calc(100% - 10px) 55%, calc(100% - 5px) 55%;
+  background-size: 5px 5px, 5px 5px;
+  background-repeat: no-repeat;
+  padding-right: 20px;
+}
+
+.detail-actions {
+  margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.detail-save {
+  border: none;
+  background: var(--detail-primary-strong);
+  color: #ffffff;
+  padding: 10px 22px;
+  border-radius: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 12px 20px rgba(126, 0, 8, 0.2);
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.detail-save:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+.detail-save:active {
+  transform: scale(0.98);
+}
+
+.detail-section.highlight {
+  background: #edeeef;
+  position: relative;
+  overflow: hidden;
+}
+
+.detail-note {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(231, 232, 233, 0.6);
+  padding: 12px 14px;
+  border-radius: 12px;
+  color: var(--detail-muted);
+  font-size: 12px;
+}
+
+.detail-loading,
+.detail-error {
+  font-size: 14px;
+  color: var(--detail-muted);
+  margin: 20px 0;
+}
+
+.detail-error {
+  color: #b91c1c;
+}
+
+.detail-footer {
+  margin-top: 48px;
+  border-top: 1px solid #e1e3e4;
+  padding-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 12px;
+  color: #8e706c;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.detail-footer a {
+  color: inherit;
+  text-decoration: none;
+  margin-left: 16px;
+}
+
+.detail-footer a:hover {
+  color: var(--detail-primary);
+}
+
+@media (max-width: 1024px) {
+  .detail-main {
+    margin-left: 0;
+    padding: 32px 24px;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+  }
+}

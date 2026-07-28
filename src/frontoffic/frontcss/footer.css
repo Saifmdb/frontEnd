@@ -1,0 +1,113 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@500;700;800&family=Inter:wght@300;400;500&display=swap");
+
+.home-footer-wrapper {
+  background: #7e0008;
+  color: #fff;
+  padding: 2.8rem 1.5rem 0;
+}
+
+.home-footer-main {
+  max-width: 1536px;
+  margin: 0 auto;
+}
+
+.home-footer-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.home-footer-brand-block {
+  max-width: 420px;
+}
+
+.home-footer-brand-block h4 {
+  margin: 0 0 1rem;
+  font-family: "Manrope", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.01em;
+}
+
+.home-footer-brand-block p {
+  margin: 0;
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.88rem;
+  line-height: 1.6;
+}
+
+.home-footer-links-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(140px, 1fr));
+  gap: 2.2rem;
+}
+
+.home-footer-links-grid h5 {
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.home-footer-links-grid ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.7rem;
+}
+
+.home-footer-links-grid a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  font-size: 0.8rem;
+  transition: color 0.2s ease;
+}
+
+.home-footer-links-grid a:hover {
+  color: #fff;
+}
+
+.home-footer-bottom {
+  max-width: 1536px;
+  margin: 2.2rem auto 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem 0 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.home-footer-bottom p {
+  margin: 0;
+  font-size: 0.72rem;
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.home-footer-bottom div {
+  display: flex;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.home-footer-bottom a {
+  color: rgba(255, 255, 255, 0.72);
+  text-decoration: none;
+  font-size: 0.72rem;
+}
+
+@media (max-width: 860px) {
+  .home-footer-links-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .home-footer-links-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,672 @@
+
+
+/* Force light background on body and root when signin page is active */
+body.signin-page,
+#root.signin-page {
+  background-color: #ffffff !important;
+  min-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* CRITICAL: Isolate signin page from global styles */
+main.signin-wrapper {
+  display: flex !important;
+  min-height: 100vh !important;
+  background-color: #ffffff !important;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  color: #191c1d !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  box-sizing: border-box !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  justify-content: flex-start !important;
+  align-items: stretch !important;
+}
+
+/* NO aggressive reset - let child styles apply naturally */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* ========== LEFT SECTION - HERO ========== */
+.signin-hero-section {
+  display: none !important;
+  flex: 1 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  background-color: #a31919 !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 3rem !important;
+  min-height: 100vh !important;
+}
+
+@media (min-width: 768px) {
+  .signin-hero-section {
+    display: flex !important;
+  }
+}
+
+/* Hero Background Image */
+.signin-hero-bg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  opacity: 0.4 !important;
+  mix-blend-mode: multiply !important;
+}
+
+/* Hero Gradient Overlay */
+.signin-hero-overlay {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: linear-gradient(135deg, rgba(126, 0, 8, 0.6) 0%, rgba(163, 25, 25, 0.4) 100%) !important;
+  z-index: 1 !important;
+}
+
+/* Hero Content Container */
+.signin-hero-content {
+  position: relative !important;
+  z-index: 2 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  justify-content: center !important;
+  max-width: 450px !important;
+  text-align: center !important;
+  color: white !important;
+}
+
+/* Hero Logo */
+.signin-hero-logo {
+  margin-bottom: 2rem !important;
+}
+
+.signin-hero-logo-img {
+  height: 60px !important;
+  width: auto !important;
+  filter: brightness(0) invert(1) !important;
+  object-fit: contain !important;
+}
+
+/* Hero Title */
+.signin-hero-title {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 3rem !important;
+  font-weight: 800 !important;
+  line-height: 1.15 !important;
+  margin-bottom: 1.5rem !important;
+  letter-spacing: -0.5px !important;
+  text-align: center !important;
+  color: white !important;
+}
+
+/* Hero Subtitle */
+.signin-hero-subtitle {
+  font-size: 1.05rem !important;
+  line-height: 1.6 !important;
+  opacity: 0.9 !important;
+  margin-bottom: 2rem !important;
+  font-weight: 400 !important;
+  text-align: center !important;
+  color: white !important;
+}
+
+/* Hero Footer */
+.signin-hero-footer {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  margin-top: auto !important;
+  padding-top: 2rem !important;
+}
+
+.signin-hero-divider {
+  width: 40px !important;
+  height: 2px !important;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.5), transparent) !important;
+}
+
+.signin-hero-footer span {
+  font-size: 0.75rem !important;
+  letter-spacing: 2px !important;
+  opacity: 0.7 !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  color: white !important;
+}
+
+/* ========== RIGHT SECTION - FORM ========== */
+.signin-form-section {
+  flex: 1 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 2rem !important;
+  background-color: #ffffff !important;
+  color: #191c1d !important;
+  overflow-y: auto !important;
+  min-height: 100vh !important;
+  width: 100% !important;
+}
+
+/* ========== FORM WRAPPER & HEADER ========== */
+
+.signin-form-wrapper {
+  width: 100% !important;
+  max-width: 420px !important;
+  color: #191c1d !important;
+}
+
+/* Mobile Logo (Hidden on Desktop) */
+.signin-logo-mobile {
+  display: block !important;
+  text-align: center !important;
+  margin-bottom: 2rem !important;
+}
+
+@media (min-width: 768px) {
+  .signin-logo-mobile {
+    display: none !important;
+  }
+}
+
+.signin-logo-mobile img {
+  height: 40px !important;
+  width: auto !important;
+  object-fit: contain !important;
+}
+
+/* Form Header */
+.signin-form-header {
+  text-align: center !important;
+  margin-bottom: 2.5rem !important;
+}
+
+.signin-form-title {
+  font-family: 'Manrope', sans-serif !important;
+  font-size: 1.875rem !important;
+  font-weight: 700 !important;
+  color: #191c1d !important;
+  margin-bottom: 0.5rem !important;
+  letter-spacing: -0.3px !important;
+}
+
+.signin-form-subtitle {
+  font-size: 0.875rem !important;
+  color: #6b6b6b !important;
+  line-height: 1.5 !important;
+}
+
+/* Error Box */
+.signin-error-box {
+  background-color: #fee2e2 !important;
+  color: #991b1b !important;
+  padding: 1rem !important;
+  border-radius: 0.375rem !important;
+  border-left: 4px solid #dc2626 !important;
+  margin-bottom: 1.5rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+}
+
+.signin-field-input.is-invalid {
+  border-color: #dc2626 !important;
+  background-color: #fff7f7 !important;
+  box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12) !important;
+}
+
+.signin-field-error {
+  margin-top: 0.45rem !important;
+  color: #b42318 !important;
+  font-size: 0.78rem !important;
+  font-weight: 600 !important;
+  line-height: 1.35 !important;
+}
+
+.signin-success-box {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.65rem !important;
+  background: linear-gradient(135deg, #e7f8ef 0%, #d7f4e7 100%) !important;
+  color: #0f5132 !important;
+  padding: 0.95rem 1rem !important;
+  border-radius: 0.5rem !important;
+  border-left: 4px solid #1f9d55 !important;
+  margin-bottom: 1.25rem !important;
+  font-size: 0.875rem !important;
+  line-height: 1.4 !important;
+  box-shadow: 0 8px 22px rgba(31, 157, 85, 0.12) !important;
+  animation: signinSuccessPop 320ms ease-out !important;
+}
+
+.signin-success-badge {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  min-width: 28px !important;
+  height: 28px !important;
+  padding: 0 0.35rem !important;
+  background-color: #1f9d55 !important;
+  color: #ffffff !important;
+  border-radius: 999px !important;
+  font-size: 0.68rem !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.4px !important;
+}
+
+.signin-progress-box {
+  background: linear-gradient(135deg, #f6f7fb 0%, #eef1f8 100%) !important;
+  color: #334155 !important;
+  padding: 0.8rem 1rem !important;
+  border-radius: 0.5rem !important;
+  border-left: 4px solid #64748b !important;
+  margin-bottom: 1.25rem !important;
+  font-size: 0.84rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.15px !important;
+  animation: signinSuccessPop 260ms ease-out !important;
+}
+
+@keyframes signinSuccessPop {
+  0% {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ========== BUTTONS ========== */
+
+/* Microsoft Login Button */
+.signin-btn-microsoft {
+  width: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 0.75rem !important;
+  padding: 0.875rem 1.5rem !important;
+  background-color: #ffffff !important;
+  border: 1px solid #e5e7eb !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.9375rem !important;
+  font-weight: 500 !important;
+  color: #191c1d !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  font-family: 'Inter', sans-serif !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  margin-bottom: 1.5rem !important;
+}
+
+.signin-btn-microsoft:hover:not(:disabled) {
+  border-color: #d1d5db !important;
+  background-color: #f9fafb !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+}
+
+.signin-btn-microsoft:active:not(:disabled) {
+  background-color: #f3f4f6 !important;
+}
+
+.signin-btn-microsoft:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+.signin-ms-logo {
+  width: 18px !important;
+  height: 18px !important;
+  flex-shrink: 0 !important;
+}
+
+/* Submit Button - Primary */
+.signin-btn-submit {
+  width: 100% !important;
+  padding: 1rem !important;
+  background: linear-gradient(135deg, #7e0008 0%, #a31919 100%) !important;
+  color: white !important;
+  border: none !important;
+  border-radius: 0.5rem !important;
+  font-size: 0.9375rem !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  transition: all 0.2s ease !important;
+  font-family: 'Inter', sans-serif !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  box-shadow: 0 4px 12px rgba(126, 0, 8, 0.2) !important;
+  margin-top: 1rem !important;
+}
+
+.signin-btn-submit:hover:not(:disabled) {
+  background: linear-gradient(135deg, #5a0006 0%, #7e0008 100%) !important;
+  box-shadow: 0 8px 24px rgba(126, 0, 8, 0.3) !important;
+  transform: translateY(-2px) !important;
+}
+
+.signin-btn-submit:active:not(:disabled) {
+  transform: translateY(0) !important;
+}
+
+.signin-btn-submit:disabled {
+  opacity: 0.6 !important;
+  cursor: not-allowed !important;
+}
+
+/* ========== DIVIDER ========== */
+
+.signin-divider-line {
+  display: flex !important;
+  align-items: center !important;
+  gap: 1rem !important;
+  margin: 1.5rem 0 !important;
+}
+
+.signin-divider-line-item {
+  flex: 1 !important;
+  height: 1px !important;
+  background-color: #e5e7eb !important;
+}
+
+.signin-divider-text {
+  font-size: 0.75rem !important;
+  color: #9a8a87 !important;
+  font-weight: 500 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 1px !important;
+  flex-shrink: 0 !important;
+}
+
+/* ========== FORM INPUTS ========== */
+
+.signin-form-inputs {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 1.5rem !important;
+}
+
+/* Form Group */
+.signin-field-group {
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.375rem !important;
+}
+
+/* Field Labels */
+.signin-field-label {
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  color: #191c1d !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+}
+
+.signin-field-label-row {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.signin-field-forgot {
+  font-size: 0.7rem !important;
+  color: #7e0008 !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.3px !important;
+  transition: color 0.2s ease !important;
+}
+
+.signin-field-forgot:hover {
+  color: #5a0006 !important;
+  text-decoration: underline !important;
+}
+
+/* Input Fields - Underline Only Style */
+.signin-field-input {
+  width: 100% !important;
+  padding: 0.75rem 0 !important;
+  background-color: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  font-size: 0.9375rem !important;
+  color: #191c1d !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: all 0.2s ease !important;
+}
+
+.signin-field-input::placeholder {
+  color: #9a8a87 !important;
+}
+
+.signin-field-input:focus {
+  outline: none !important;
+  border-bottom-color: #7e0008 !important;
+}
+
+.signin-field-input:disabled {
+  color: #9a8a87 !important;
+  cursor: not-allowed !important;
+}
+
+/* Password Field Wrapper */
+.signin-field-password-wrapper {
+  position: relative !important;
+  display: flex !important;
+  align-items: center !important;
+  border-bottom: 1px solid #e5e7eb !important;
+  transition: border-color 0.2s ease !important;
+}
+
+.signin-field-password-wrapper .signin-field-input {
+  border: none !important;
+}
+
+.signin-field-password-wrapper:focus-within {
+  border-bottom-color: #7e0008 !important;
+}
+
+/* Toggle Password Button */
+.signin-field-toggle {
+  position: absolute !important;
+  right: 0 !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  color: #9a8a87 !important;
+  padding: 0.25rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  transition: color 0.2s ease !important;
+}
+
+.signin-field-toggle:hover:not(:disabled) {
+  color: #191c1d !important;
+}
+
+.signin-field-toggle:disabled {
+  opacity: 0.5 !important;
+  cursor: not-allowed !important;
+}
+
+/* Remember Me */
+.signin-field-remember {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  padding: 0.5rem 0 !important;
+}
+
+.signin-field-checkbox {
+  width: 18px !important;
+  height: 18px !important;
+  cursor: pointer !important;
+  accent-color: #7e0008 !important;
+  border-radius: 0.25rem !important;
+}
+
+.signin-field-checkbox-label {
+  font-size: 0.875rem !important;
+  color: #6b6b6b !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+/* ========== FOOTER ========== */
+
+.signin-form-footer {
+  margin-top: 2rem !important;
+  text-align: center !important;
+  padding-top: 1.5rem !important;
+  border-top: 1px solid #e5e7eb !important;
+}
+
+.signin-form-footer p {
+  font-size: 0.8125rem !important;
+  color: #6b6b6b !important;
+  line-height: 1.5 !important;
+}
+
+.signin-form-footer a {
+  color: #7e0008 !important;
+  text-decoration: none !important;
+  font-weight: 600 !important;
+  transition: color 0.2s ease !important;
+}
+
+.signin-form-footer a:hover {
+  color: #5a0006 !important;
+  text-decoration: underline !important;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+@media (max-width: 1024px) {
+  .signin-hero-title {
+    font-size: 2.25rem !important;
+  }
+
+  .signin-hero-subtitle {
+    font-size: 0.95rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .signin-wrapper {
+    flex-direction: column-reverse !important;
+  }
+
+  .signin-form-section {
+    min-height: auto !important;
+  }
+
+  .signin-form-title {
+    font-size: 1.5rem !important;
+  }
+
+  .signin-form-subtitle {
+    font-size: 0.8125rem !important;
+  }
+
+  .signin-field-label {
+    font-size: 0.7rem !important;
+  }
+
+  .signin-field-input {
+    font-size: 0.875rem !important;
+  }
+
+  .signin-btn-submit {
+    font-size: 0.875rem !important;
+    padding: 0.875rem !important;
+  }
+
+  .signin-btn-microsoft {
+    font-size: 0.875rem !important;
+    padding: 0.75rem 1rem !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .signin-form-wrapper {
+    max-width: 100% !important;
+  }
+
+  .signin-form-header {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .signin-form-title {
+    font-size: 1.25rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .signin-form-subtitle {
+    font-size: 0.75rem !important;
+  }
+
+  .signin-form-section {
+    padding: 1rem !important;
+  }
+
+  .signin-field-group {
+    gap: 0.25rem !important;
+  }
+
+  .signin-form-inputs {
+    gap: 1rem !important;
+  }
+
+  .signin-divider-line {
+    margin: 1rem 0 !important;
+  }
+
+  .signin-hero-logo-img {
+    height: 40px !important;
+  }
+
+  .signin-logo-mobile img {
+    height: 32px !important;
+  }
+}
+
+/* ========== ACCESSIBILITY ========== */
+
+.signin-field-input:focus-visible,
+.signin-btn-submit:focus-visible,
+.signin-btn-microsoft:focus-visible {
+  outline: 2px solid #7e0008 !important;
+  outline-offset: 2px !important;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
