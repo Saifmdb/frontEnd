@@ -201,7 +201,6 @@ export default function TraitementAvanceSalaire() {
     }
   };
 
-  const isPending = demande?.statut === 'EN_ATTENTE';
   const empName = employe?.full_name || demande?.demandeur?.full_name || demande?.demandeur?.username || '-';
   const initiale = empName.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2) || '?';
   const empProfile = employe?.profile || null;
@@ -326,7 +325,7 @@ export default function TraitementAvanceSalaire() {
                   <strong className="tra-avance-code">#AV-{String(demande.id).padStart(4, '0')}</strong>
                 </div>
                 <div className="tra-avance-detail-row">
-                  <span className="tra-label">Type d'avance</span>
+                  <span className="tra-label">Type d&apos;avance</span>
                   <span className="tra-avance-badge-type">Avance sur Salaire</span>
                 </div>
                 <div className="tra-avance-detail-row">

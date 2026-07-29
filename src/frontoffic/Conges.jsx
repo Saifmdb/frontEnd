@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "./components/navbar.jsx";
 import { authFetch } from "../api/authFetch.js";
@@ -16,7 +16,6 @@ export default function Conges() {
   const [dateFilter, setDateFilter] = useState("");
   const [isLoading, setIsLoading] = useState(true);
   const [stats, setStats] = useState({ approved: 0, pending: 0, rejected: 0 });
-  const [selectedDemande, setSelectedDemande] = useState(null);
 
   // Matricule de l'utilisateur courant, utilisé uniquement pour construire le lien
   // vers sa propre page de nouvelle demande (pas pour l'authentification des appels API).
@@ -63,7 +62,9 @@ export default function Conges() {
       if (data.success) {
         setSoldeConge(data.solde_conge);
       }
-    } catch (error) {}
+    } catch {
+      /* ignore */
+    }
   };
 
   useEffect(() => {
@@ -156,7 +157,7 @@ export default function Conges() {
         <header className="conges-header">
           <div className="conges-header-content">
             <h1>Historique des demandes de congé</h1>
-            <p>Consultez et gérez vos demandes passées. Suivez l'état de validation de vos congés annuels, exceptionnels ou maladies en temps réel.</p>
+            <p>Consultez et gérez vos demandes passées. Suivez l&apos;état de validation de vos congés annuels, exceptionnels ou maladies en temps réel.</p>
           </div>
           <div className="conges-header-action">
             <Link to={`/demande-conge/${matricule || 'new'}`} className="btn-nouvelle-demande">
@@ -293,7 +294,7 @@ export default function Conges() {
 
             {/* Support Card */}
             <div className="conges-support-card">
-              <h4>Besoin d'aide ?</h4>
+              <h4>Besoin d&apos;aide ?</h4>
               <p>Contactez le service RH ou consultez notre chatbot pour vos questions sur la politique de congés.</p>
               <a href="#" className="conges-support-link">
                 Consulter la politique RH

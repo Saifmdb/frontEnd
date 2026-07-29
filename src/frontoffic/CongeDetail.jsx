@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import Navbar from "./components/navbar.jsx";
 import { authFetch } from "../api/authFetch.js";
@@ -119,7 +119,7 @@ export default function CongeDetail() {
       } else {
         setSaveError(data.error || "Erreur lors de la modification");
       }
-    } catch (err) {
+    } catch {
       setSaveError("Erreur de connexion lors de la modification");
     } finally {
       setIsSaving(false);
@@ -318,7 +318,7 @@ export default function CongeDetail() {
                     <div className="cd-info-item full-width">
                       <p className="cd-info-label">Motif de la demande</p>
                       <div className="cd-motif-box">
-                        <p>"{demande.motif}"</p>
+                        <p>&quot;{demande.motif}&quot;</p>
                       </div>
                     </div>
                   )}
@@ -403,7 +403,7 @@ export default function CongeDetail() {
         {showConfirm && (
           <div className="cd-modal-overlay" onClick={() => !isAnnulling && setShowConfirm(false)}>
             <div className="cd-modal-content" onClick={(e) => e.stopPropagation()}>
-              <h3 className="cd-modal-title">Confirmer l'annulation</h3>
+              <h3 className="cd-modal-title">Confirmer l&apos;annulation</h3>
               <p className="cd-modal-text">
                 Êtes-vous sûr de vouloir annuler cette demande de congé? Cette action est irréversible.
               </p>

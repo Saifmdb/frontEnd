@@ -226,7 +226,7 @@ export default function DetailDemandeCredit() {
                   </div>
                 </div>
                 <div className={`ddc-field${editing ? ' editing' : ''}`}>
-                  <label>Début de l'échéance</label>
+                  <label>Début de l&apos;échéance</label>
                   {editing ? (
                     <input type="date" value={form.date_premiere_echeance} onChange={e => handleChange('date_premiere_echeance', e.target.value)} />
                   ) : (

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Navbar from './components/navbar';
 import { Link, useLocation } from 'react-router-dom';
 import { authFetch } from '../api/authFetch.js';
@@ -33,7 +33,7 @@ export default function DemandeDocument() {
       if (user.rh_email)                    rhEmail = user.rh_email;
       else if (user.profile?.rh_email)      rhEmail = user.profile.rh_email;
     }
-  } catch (_) { /* fallback */ }
+  } catch { /* fallback */ }
 
   // ---- submit handler ----
   const handleSubmit = async (e) => {
@@ -274,7 +274,7 @@ export default function DemandeDocument() {
                       <div>
                         <div className="text-sm font-bold uppercase tracking-tighter mb-1">Support RH</div>
                         <p className="text-sm text-[#5a403e] leading-relaxed">
-                          Besoin d'assistance ? Contactez le service RH au <strong>{rhEmail}</strong>.
+                          Besoin d&apos;assistance ? Contactez le service RH au <strong>{rhEmail}</strong>.
                         </p>
                       </div>
                     </div>

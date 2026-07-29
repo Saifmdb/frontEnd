@@ -1,5 +1,4 @@
 import { useState, useEffect, useMemo } from "react";
-import { FileText } from "lucide-react";
 import jsPDF from "jspdf";
 import autoTable from "jspdf-autotable";
 import Navbar from "./components/navbar";
@@ -70,15 +69,6 @@ export default function HistoriqueConges() {
     fetchHistorique();
   }, []);
 
-  const types = useMemo(() => [...new Set(demandes.map(d => d.type))], [demandes]);
-
-  const statuses = [
-    { value: "APPROUVE", label: "Approuvé" },
-    { value: "REFUSE", label: "Refusé" },
-    { value: "EN_ATTENTE", label: "En attente" },
-    { value: "EN_ATTENTE_MANAGER", label: "En attente (manager)" },
-  ];
-
   const filteredDemandes = useMemo(() => {
     return demandes.filter(d => {
       if (filters.status && d.status !== filters.status) return false;
@@ -90,22 +80,8 @@ export default function HistoriqueConges() {
     });
   }, [filters, demandes]);
 
-  // Statistiques
-  const stats = useMemo(() => {
-    const total = demandes.length;
-    const approved = demandes.filter(d => d.status === "APPROUVE").length;
-    const refused = demandes.filter(d => d.status === "REFUSE").length;
-    const pending = demandes.filter(d => d.status === "EN_ATTENTE" || d.status === "EN_ATTENTE_MANAGER").length;
-    const totalDays = demandes.reduce((acc, d) => {
-      if (d.status === "APPROUVE") {
-        const days = Math.ceil((new Date(d.endDate) - new Date(d.startDate)) / (1000*60*60*24)) + 1;
-        return acc + days;
-      }
-      return acc;
-    }, 0);
-    return { total, approved, refused, pending, totalDays };
-  }, [demandes]);
 
+  // eslint-disable-next-line no-unused-vars -- not wired to a "clear filters" button yet
   const clearFilters = () => setFilters({ status: "", type: "", searchEmployee: "", dateFrom: "", dateTo: "" });
 
   // Pagination
@@ -176,12 +152,6 @@ export default function HistoriqueConges() {
     doc.save(`historique-conges-${new Date().toISOString().split('T')[0]}.pdf`);
   };
 
-  const getStatusColor = (status) => {
-    if (status === "APPROUVE") return "approved";
-    if (status === "REFUSE") return "refused";
-    return "pending";
-  };
-
   const getStatusBadgeClass = (status) => {
     if (status === "APPROUVE") return "hc-status-approved";
     if (status === "REFUSE") return "hc-status-refused";
@@ -196,7 +166,7 @@ export default function HistoriqueConges() {
         <Navbar />
         <div className="hc-content" style={{ textAlign: 'center', padding: '3rem' }}>
           <div className="hc-spinner"></div>
-          <p>Chargement de l'historique...</p>
+          <p>Chargement de l&apos;historique...</p>
         </div>
       </div>
     );
@@ -236,7 +206,7 @@ export default function HistoriqueConges() {
         <div className="hc-header-section">
           <div className="hc-header-content">
             <h1 className="hc-header-title">Historique des Demandes de Congé</h1>
-            <p className="hc-header-description">Consultez et gérez l'ensemble des demandes de congés déposées par vos collaborateurs au sein du réseau Honoris.</p>
+            <p className="hc-header-description">Consultez et gérez l&apos;ensemble des demandes de congés déposées par vos collaborateurs au sein du réseau Honoris.</p>
           </div>
           <div className="hc-header-actions">
             <button className="hc-btn-action" onClick={handleExport}>

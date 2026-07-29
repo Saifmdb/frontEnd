@@ -1,19 +1,12 @@
 import { useState, useRef, useEffect } from "react";
-import { X, Paperclip, ChevronLeft, ChevronRight } from "lucide-react";
+import PropTypes from "prop-types";
+import { X, Paperclip } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./components/navbar";
 import "./frontcss/chatbot-v2.css";
 import "../frontoffic/frontcss/welcome.css";
-import chatbotIcon from "../assets/chatbot.png";
-import { useRenderMessage } from "./renderMessage";
 
 const BACKEND_URL = import.meta.env.REACT_APP_BACKEND_URL || import.meta.env.VITE_BACKEND_URL || "http://127.0.0.1:8000";
-
-const HERO_MESSAGES = [
-  "Le chatbot est un assistant intelligent pour l'intranet RH qui comprend le français naturel et guide les employés sans formulaire compliqué.",
-  "Posez vos questions RH, consultez rapidement vos informations et gagnez du temps dans vos démarches quotidiennes.",
-  "Demandes de congé, réclamations, attestations: un seul assistant pour simplifier vos échanges avec le service RH.",
-];
 
 function cleanBotText(text) {
   if (!text) return "";
@@ -44,6 +37,7 @@ function cleanBotText(text) {
   protected_text = protected_text.replace(/^\d+\.\s*/gm, "");
 
   // 3. Restaurer les tokens protégés
+  // eslint-disable-next-line no-control-regex -- \x00 markers are intentional placeholders inserted above to protect tokens from text cleanup
   protected_text = protected_text.replace(/\x00TOKEN(\d+)\x00/g, (_, idx) => tokens[parseInt(idx)]);
 
   return protected_text.trim();
@@ -180,6 +174,11 @@ function BotMessageContent({ text, onNavigate }) {
   );
 }
 
+BotMessageContent.propTypes = {
+  text: PropTypes.string,
+  onNavigate: PropTypes.func,
+};
+
 function getAuthToken() {
   // Seul temp_token est un JWT applicatif que le backend sait vérifier —
   // les autres clés (token Microsoft, etc.) ne sont pas des JWT signés par nous.
@@ -223,8 +222,6 @@ async function fetchWithTimeout(url, options = {}, timeoutMs = 15000) {
 
 export default function Chatbot() {
   const navigate = useNavigate();
-  const [isOpen, setIsOpen] = useState(false);
-  const [activeHeroSlide, setActiveHeroSlide] = useState(0);
   const [conversations, setConversations] = useState([]);
   const [currentConversation, setCurrentConversation] = useState(
     localStorage.getItem("conversationId") || null
@@ -682,18 +679,6 @@ export default function Chatbot() {
     }
   };
 
-  const goToHeroSlide = (slideIndex) => {
-    setActiveHeroSlide(slideIndex);
-  };
-
-  const goToNextHeroSlide = () => {
-    setActiveHeroSlide((prev) => (prev + 1) % HERO_MESSAGES.length);
-  };
-
-  const goToPreviousHeroSlide = () => {
-    setActiveHeroSlide((prev) => (prev - 1 + HERO_MESSAGES.length) % HERO_MESSAGES.length);
-  };
-
   const handleSendMessage = async (e) => {
     e?.preventDefault?.();
 
@@ -873,8 +858,6 @@ export default function Chatbot() {
     });
   };
 
-  const renderMsg = useRenderMessage();
-
   return (
     <div className="cb-page-root">
       <Navbar hideDisconnectBtn={false} />
@@ -958,7 +941,7 @@ export default function Chatbot() {
               <div style={{display:'flex', flexDirection:'column', alignItems:'center', marginBottom:'1rem', paddingTop:'3rem'}}>
                 <h3 style={{fontFamily:'var(--cb-font-headline)', fontWeight:800, fontSize:'1.5rem', textAlign:'center'}}>Bonjour !</h3>
                 <p style={{color:'var(--cb-on-surface-variant)', textAlign:'center', maxWidth:'400px', marginTop:'0.5rem', fontSize:'14px'}}>
-                  Je suis votre assistant Honoris. Comment puis-je vous accompagner dans vos démarches administratives aujourd'hui ?
+                  Je suis votre assistant Honoris. Comment puis-je vous accompagner dans vos démarches administratives aujourd&apos;hui ?
                 </p>
               </div>
             )}
@@ -1047,7 +1030,7 @@ export default function Chatbot() {
                 </div>
               </div>
               <p style={{fontSize:'10px', textAlign:'center', color:'var(--cb-on-surface-variant)', marginTop:'12px', fontWeight:500}}>
-                L'IA peut faire des erreurs. Veuillez vérifier les informations importantes auprès du département RH.
+                L&apos;IA peut faire des erreurs. Veuillez vérifier les informations importantes auprès du département RH.
               </p>
             </div>
           </footer>
@@ -1087,10 +1070,10 @@ export default function Chatbot() {
               <div style={{width:'32px', height:'32px', backgroundColor:'white', borderRadius:'50%', display:'flex', alignItems:'center', justifyContent:'center', color:'var(--cb-honoris-burgundy)', boxShadow:'0 2px 4px rgba(0,0,0,0.05)'}}>
                 <span className="material-symbols-outlined" style={{fontSize:'18px'}}>support_agent</span>
               </div>
-              <h4 style={{fontFamily:'var(--cb-font-headline)', fontWeight:700, fontSize:'14px', margin:0}}>Besoin d'aide ?</h4>
+              <h4 style={{fontFamily:'var(--cb-font-headline)', fontWeight:700, fontSize:'14px', margin:0}}>Besoin d&apos;aide ?</h4>
             </div>
             <p style={{fontSize:'11px', color:'var(--cb-on-surface-variant)', marginBottom:'1rem', lineHeight:1.5}}>
-              Si l'assistant ne peut pas répondre à votre demande, nos experts RH sont disponibles.
+              Si l&apos;assistant ne peut pas répondre à votre demande, nos experts RH sont disponibles.
             </p>
             <button style={{width:'100%', padding:'10px', backgroundColor:'white', border:'1px solid var(--cb-honoris-burgundy)', color:'var(--cb-honoris-burgundy)', borderRadius:'8px', fontSize:'12px', fontWeight:700, cursor:'pointer'}}>
               Contacter le Support RH

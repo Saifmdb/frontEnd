@@ -84,7 +84,7 @@ export default function UserManagement() {
       });
 
       window.location.href = "/signin?logout=true&t=" + Date.now();
-    } catch (error) {
+    } catch {
       localStorage.removeItem("user");
       localStorage.removeItem("access_token");
       localStorage.removeItem("auth_token");

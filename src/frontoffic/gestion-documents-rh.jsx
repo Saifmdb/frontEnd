@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from "react";
-import { Upload, FileText, CalendarDays, UserCircle2, Download } from "lucide-react";
+import { Upload, FileText, UserCircle2, Download } from "lucide-react";
 import Navbar from "./components/navbar";
 import { Link } from "react-router-dom";
 import { authFetch } from "../api/authFetch.js";
@@ -11,6 +11,7 @@ export default function GestionDocumentsRH() {
 
   const [categories, setCategories] = useState([]);
   const [documents, setDocuments] = useState([]);
+  // eslint-disable-next-line no-unused-vars -- populated from API response, not wired to UI yet
   const [statsCategories, setStatsCategories] = useState([]);
   const [uploading, setUploading] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -187,7 +188,7 @@ export default function GestionDocumentsRH() {
                 Sécurité Garantie
               </h3>
               <p className="text-sm text-on-surface-variant italic">
-                "Toutes les données sont cryptées conformément aux protocoles RGPD en vigueur au sein du réseau Honoris."
+                &quot;Toutes les données sont cryptées conformément aux protocoles RGPD en vigueur au sein du réseau Honoris.&quot;
               </p>
             </div>
           </div>

@@ -1,5 +1,6 @@
 import { Routes, Route, Navigate, useParams, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import { useAuth } from './hooks/useAuth'
 import { setNavigate } from './api/navigation'
 
@@ -91,27 +92,6 @@ function GestionCongesWrapper() {
   return <GestionCongesManager username={username} matricule={matricule} />;
 }
 
-function CongesWrapper() {
-  const { matricule } = useParams();
-  const [username, setUsername] = useState(null);
-  
-  useEffect(() => {
-    const userData = localStorage.getItem('user');
-    if (userData) {
-      try {
-        const user = JSON.parse(userData);
-        setUsername(user.username);
-      } catch (e) {
-        console.error("Erreur parsing user:", e);
-      }
-    }
-  }, []);
-  
-  if (!username) return <div>Chargement...</div>;
-  
-  return <Conges username={username} matricule={matricule} />;
-}
-
 function ProtectedRoute({ children }) {
   const { isAuthenticated, user, logout } = useAuth();
 
@@ -126,6 +106,10 @@ function ProtectedRoute({ children }) {
   return children;
 }
 
+ProtectedRoute.propTypes = {
+  children: PropTypes.node,
+};
+
 function PublicOnlyRoute({ children }) {
   const { isAuthenticated, isAdmin } = useAuth();
 
@@ -135,6 +119,10 @@ function PublicOnlyRoute({ children }) {
 
   return children;
 }
+
+PublicOnlyRoute.propTypes = {
+  children: PropTypes.node,
+};
 
 function App() {
   // Import classique du composant GoogleCallback

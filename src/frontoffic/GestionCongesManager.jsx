@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "./components/navbar.jsx";
 import RepondreConge from "./RepondreConge.jsx";
 import { authFetch } from "../api/authFetch.js";
 import "./frontcss/gestion-conges-unique.css";
 
 const API_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api";
-const BACKEND_ORIGIN = (API_URL || '').replace(/\/api\/?$/, '') || 'http://localhost:8000';
 
 export default function GestionCongesManager() {
   const [demandesEnAttente, setDemandesEnAttente] = useState([]);
@@ -14,6 +13,7 @@ export default function GestionCongesManager() {
   const [commentaire, setCommentaire] = useState("");
   const [selectedDemande, setSelectedDemande] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  // eslint-disable-next-line no-unused-vars -- not wired to UI yet, kept for handleAction below
   const [loading, setLoading] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
 
@@ -72,6 +72,7 @@ export default function GestionCongesManager() {
     setCommentaire("");
   };
 
+  // eslint-disable-next-line no-unused-vars -- not wired to UI yet, calls backend approve/refuse endpoint
   const handleAction = async (actionType) => {
     if (!selectedDemande) return;
     setLoading(true);
@@ -96,7 +97,7 @@ export default function GestionCongesManager() {
       } else {
         setMessage({ type: "error", text: data.error || "Une erreur est survenue" });
       }
-    } catch (error) {
+    } catch {
       setMessage({ type: "error", text: "Erreur de connexion au serveur" });
     } finally {
       setLoading(false);
@@ -188,7 +189,7 @@ export default function GestionCongesManager() {
           <div className="gcm-stat-card pending">
             <div className="gcm-stat-card-header">
               <div>
-                <p className="gcm-stat-label">En attente d'approbation</p>
+                <p className="gcm-stat-label">En attente d&apos;approbation</p>
                 <h3 className="gcm-stat-value">{demandesEnAttente.length < 10 ? '0'+demandesEnAttente.length : demandesEnAttente.length}</h3>
               </div>
               <div className="gcm-stat-icon-wrapper">

@@ -157,7 +157,7 @@ export default function ReunionDetail() {
         });
         const data = await res.json();
         if (data.success) setAllParticipants(data.participants || []);
-      } catch (_) {/* ignore */} finally {
+      } catch {/* ignore */} finally {
         setLoadingParticipants(false);
       }
     }
@@ -580,7 +580,7 @@ export default function ReunionDetail() {
               <AlertTriangle size={32} />
             </div>
             <h3>Action irréversible</h3>
-            <p>Choisissez l'action à effectuer sur cette réunion.</p>
+            <p>Choisissez l&apos;action à effectuer sur cette réunion.</p>
 
             <div className="rd-modal-options">
               <label className={`rd-modal-option ${deleteAction === "cancel" ? "selected" : ""}`}>
@@ -593,7 +593,7 @@ export default function ReunionDetail() {
                 />
                 <div>
                   <strong>Annuler la réunion</strong>
-                  <small>La réunion reste visible avec le statut "Annulée"</small>
+                  <small>La réunion reste visible avec le statut &quot;Annulée&quot;</small>
                 </div>
               </label>
               <label className={`rd-modal-option ${deleteAction === "delete" ? "selected" : ""}`}>

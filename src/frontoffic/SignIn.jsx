@@ -227,7 +227,7 @@ export default function SignIn() {
       let parsed = null;
       try {
         parsed = responseText ? JSON.parse(responseText) : null;
-      } catch (parseError) {
+      } catch {
         parsed = null;
       }
 
@@ -313,7 +313,9 @@ export default function SignIn() {
                 try {
                   const userIdForChat = data.user.username || data.user.email || data.user.id;
                   if (userIdForChat) localStorage.setItem('userId', userIdForChat);
-                } catch (e) {}
+                } catch {
+                  /* ignore */
+                }
               }
             } catch (claimErr) {
               console.warn('⚠️ Claim request failed:', claimErr);
@@ -539,11 +541,11 @@ export default function SignIn() {
             </div>
             
             {/* Title */}
-            <h1 className="signin-hero-title">Former les futurs leaders de l'Afrique.</h1>
+            <h1 className="signin-hero-title">Former les futurs leaders de l&apos;Afrique.</h1>
             
             {/* Subtitle */}
             <p className="signin-hero-subtitle">
-              Rejoignez le premier et le plus grand réseau panafricain d'enseignement supérieur privé engagé dans la réussite des étudiants.
+              Rejoignez le premier et le plus grand réseau panafricain d&apos;enseignement supérieur privé engagé dans la réussite des étudiants.
             </p>
             
             {/* Footer Divider */}
@@ -691,7 +693,7 @@ export default function SignIn() {
 
             {/* Footer Support Link */}
             <div className="signin-form-footer">
-              <p>Besoin d'aide ? <a href="#">Contactez le support IT</a></p>
+              <p>Besoin d&apos;aide ? <a href="#">Contactez le support IT</a></p>
             </div>
           </div>
         </section>

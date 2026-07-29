@@ -126,7 +126,7 @@ export default function UserDetail() {
       });
 
       window.location.href = "/signin?logout=true&t=" + Date.now();
-    } catch (error) {
+    } catch {
       localStorage.removeItem("user");
       localStorage.removeItem("access_token");
       localStorage.removeItem("auth_token");
@@ -209,9 +209,6 @@ export default function UserDetail() {
   const profile = userDetail?.profile || {};
   const statusLabel = userDetail?.is_active ? "Actif" : "Inactif";
   const statusClass = userDetail?.is_active ? "active" : "inactive";
-  const formattedDate = profile.date_entree
-    ? new Date(profile.date_entree).toLocaleDateString("fr-FR")
-    : "-";
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -298,7 +295,7 @@ export default function UserDetail() {
         <header className="detail-header">
           <div>
             <p className="detail-kicker">User Manager / Detail</p>
-            <h2>Details de l'employe</h2>
+            <h2>Details de l&apos;employe</h2>
           </div>
         </header>
 
@@ -446,7 +443,7 @@ export default function UserDetail() {
                     </select>
                   </label>
                   <label className="detail-input">
-                    <span>Date d'entree</span>
+                    <span>Date d&apos;entree</span>
                     <input
                       name="date_entree"
                       type="date"

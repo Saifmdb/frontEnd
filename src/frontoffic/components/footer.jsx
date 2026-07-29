@@ -1,4 +1,3 @@
-import React from "react";
 import "../frontcss/footer.css";
 
 export default function Footer() {
@@ -9,7 +8,7 @@ export default function Footer() {
           <div className="home-footer-brand-block">
             <h4>HONORIS UNITED UNIVERSITIES</h4>
             <p>
-              Premier reseau panafricain d'enseignement superieur prive engage a former la prochaine generation de leaders pour un impact mondial.
+              Premier reseau panafricain d&apos;enseignement superieur prive engage a former la prochaine generation de leaders pour un impact mondial.
             </p>
           </div>
 
@@ -48,7 +47,7 @@ export default function Footer() {
       <div className="home-footer-bottom">
         <p>© 2024 Honoris United Universities. Education for Impact.</p>
         <div>
-          <a href="#">Conditions d'utilisation</a>
+          <a href="#">Conditions d&apos;utilisation</a>
           <a href="#">Accessibilite</a>
           <a href="#">Plan du site</a>
         </div>

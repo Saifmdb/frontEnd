@@ -1,5 +1,3 @@
-import React from "react";
-
 export function useRenderMessage() {
   return function renderMsg(text) {
     if (!text) return null;

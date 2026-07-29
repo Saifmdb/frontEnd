@@ -1,6 +1,6 @@
-﻿import React, { useState, useEffect } from "react";
+﻿import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { AlertCircle, RefreshCw } from "lucide-react";
+import { RefreshCw } from "lucide-react";
 import Navbar from "./components/navbar.jsx";
 import { authFetch } from "../api/authFetch.js";
 import "./frontcss/demande-conge.css";
@@ -10,6 +10,7 @@ const API_URL = import.meta.env.VITE_API_BASE_URL || "http://localhost:8000/api"
 export default function DemandeConge() {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({ date_debut: "", date_fin: "", type_conge: "", motif: "" });
+  // eslint-disable-next-line no-unused-vars -- not rendered yet, kept for handleAnnuler below
   const [demandes, setDemandes] = useState([]);
   const [soldeConge, setSoldeConge] = useState(0);
   const [soldeDisponible, setSoldeDisponible] = useState(0);
@@ -21,6 +22,7 @@ export default function DemandeConge() {
   const [fieldErrors, setFieldErrors] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  // eslint-disable-next-line no-unused-vars -- not wired to UI yet, kept for handleAnnuler below
   const [confirmModal, setConfirmModal] = useState({ isOpen: false, demandeId: null });
 
   const fetchMesDemandes = async () => {
@@ -34,7 +36,9 @@ export default function DemandeConge() {
         setSoldeDisponible(data.solde_disponible !== undefined ? data.solde_disponible : data.solde_conge);
         setJoursEnAttente(data.jours_en_attente || 0);
       }
-    } catch (error) {}
+    } catch {
+      /* ignore */
+    }
   };
 
   const fetchSolde = async () => {
@@ -46,7 +50,9 @@ export default function DemandeConge() {
         setSoldeDisponible(data.solde_disponible !== undefined ? data.solde_disponible : data.solde_conge);
         setJoursEnAttente(data.jours_en_attente || 0);
       }
-    } catch (error) {}
+    } catch {
+      /* ignore */
+    }
   };
 
   useEffect(() => {
@@ -68,7 +74,7 @@ export default function DemandeConge() {
           setTypesConge(data.types);
           setFormData((f) => ({ ...f, type_conge: f.type_conge || (data.types[0] && data.types[0].value) || '' }));
         } else setTypesConge([]);
-      } catch (e) { setTypesConge([]); }
+      } catch { setTypesConge([]); }
     };
     fetchTypes();
   }, []);
@@ -233,13 +239,14 @@ export default function DemandeConge() {
       } else {
         setAlert({ type: "error", message: data.error || "Erreur lors de la soumission" });
       }
-    } catch (error) {
+    } catch {
       setAlert({ type: "error", message: "Erreur de connexion au serveur" });
     } finally {
       setIsSubmitting(false);
     }
   };
 
+  // eslint-disable-next-line no-unused-vars -- not wired to UI yet
   const handleAnnuler = async (demandeId) => {
     setConfirmModal({ isOpen: false, demandeId: null });
     try {
@@ -254,9 +261,12 @@ export default function DemandeConge() {
       } else {
         setAlert({ type: "error", message: data.error || "Erreur lors de l'annulation" });
       }
-    } catch (error) {}
+    } catch {
+      /* ignore */
+    }
   };
 
+  // eslint-disable-next-line no-unused-vars -- not wired to UI yet
   const getStatusBadge = (statut) => {
     const statusMap = {
       APPROUVE: { text: "Approuvé", color: "success", icon: "check_circle" },
@@ -299,7 +309,7 @@ export default function DemandeConge() {
         <header className="dc-new-header">
           <div className="dc-new-herotext">
             <h1>Nouvelle Demande de Congé</h1>
-            <p>Soumettez vos dates d'absence en quelques clics. Votre solde est mis à jour en temps réel après approbation.</p>
+            <p>Soumettez vos dates d&apos;absence en quelques clics. Votre solde est mis à jour en temps réel après approbation.</p>
           </div>
           
           <div className="dc-new-soldecard">
@@ -318,7 +328,7 @@ export default function DemandeConge() {
             <span>
               Vous avez déjà {joursEnAttente} jour(s) de demande(s) en attente de traitement qui
               engagent tout votre solde. Vous ne pouvez pas soumettre de nouvelle demande tant
-              qu'elles n'ont pas été traitées.
+              qu&apos;elles n&apos;ont pas été traitées.
             </span>
           </div>
         )}
@@ -468,7 +478,7 @@ export default function DemandeConge() {
                 <span className="material-symbols-outlined">check_circle</span>
                 <div>
                   <p className="rule-title">Délai de soumission</p>
-                  <p className="rule-desc">Toute demande doit être soumise au moins 15 jours à l'avance pour permettre l'organisation des services.</p>
+                  <p className="rule-desc">Toute demande doit être soumise au moins 15 jours à l&apos;avance pour permettre l&apos;organisation des services.</p>
                 </div>
               </li>
               <li>
@@ -481,8 +491,8 @@ export default function DemandeConge() {
               <li>
                 <span className="material-symbols-outlined">check_circle</span>
                 <div>
-                  <p className="rule-title">Processus d'approbation</p>
-                  <p className="rule-desc">L'approbation de votre manager direct est indispensable avant la validation finale par le département RH.</p>
+                  <p className="rule-title">Processus d&apos;approbation</p>
+                  <p className="rule-desc">L&apos;approbation de votre manager direct est indispensable avant la validation finale par le département RH.</p>
                 </div>
               </li>
             </ul>

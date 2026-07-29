@@ -214,7 +214,7 @@ export default function HistoriqueDemandeDocument() {
                     <tr>
                       <td colSpan={5} className="doc-history-empty">
                         <span className="material-symbols-outlined loading">progress_activity</span>
-                        Chargement de l'historique...
+                        Chargement de l&apos;historique...
                       </td>
                     </tr>
                   ) : error ? (
@@ -329,7 +329,7 @@ export default function HistoriqueDemandeDocument() {
         <section className="doc-history-cards">
           <div className="doc-assist-card">
             <div className="doc-assist-content">
-              <h3>Besoin d'assistance ?</h3>
+              <h3>Besoin d&apos;assistance ?</h3>
               <p>
                 Si votre demande prend plus de 48h a etre traitee ou si vous avez
                 une question specifique sur un document, contactez directement le support administratif.

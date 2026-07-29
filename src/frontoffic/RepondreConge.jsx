@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import PropTypes from 'prop-types';
 import { authFetch } from "../api/authFetch.js";
 import './frontcss/repondre-conge.css';
 
@@ -42,7 +43,7 @@ export default function RepondreConge({ demande, onBack, onStatusUpdate }) {
       } else {
         setMessage({ type: "error", text: data.error || "Une erreur est survenue" });
       }
-    } catch (error) {
+    } catch {
       setMessage({ type: "error", text: "Erreur de connexion au serveur" });
     } finally {
       setLoading(false);
@@ -145,10 +146,10 @@ export default function RepondreConge({ demande, onBack, onStatusUpdate }) {
             {/* Context/Justification */}
             <div className="rc-note-box">
               <h3 className="rc-headline rc-note-title">
-                <span className="rc-note-icon">info</span> Note de l'employé
+                <span className="rc-note-icon">info</span> Note de l&apos;employé
               </h3>
               <p className="rc-note-text">
-                "{demande.motif || 'Aucun motif fourni pour cette demande.'}"
+                &quot;{demande.motif || 'Aucun motif fourni pour cette demande.'}&quot;
               </p>
               {demande.justificatif_url && (
                 <a 
@@ -215,7 +216,7 @@ export default function RepondreConge({ demande, onBack, onStatusUpdate }) {
                 </div>
               )}
               
-              <p className="rc-notice">Une notification automatique sera envoyée à l'employé dès validation.</p>
+              <p className="rc-notice">Une notification automatique sera envoyée à l&apos;employé dès validation.</p>
             </div>
           </section>
         </div>
@@ -223,3 +224,25 @@ export default function RepondreConge({ demande, onBack, onStatusUpdate }) {
     </div>
   );
 }
+
+RepondreConge.propTypes = {
+  demande: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    statut: PropTypes.string,
+    demandeur: PropTypes.shape({
+      full_name: PropTypes.string,
+      departement: PropTypes.string,
+      matricule: PropTypes.string,
+      anciennete: PropTypes.string,
+      solde_conge: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    }),
+    type_conge_display: PropTypes.string,
+    date_debut: PropTypes.string,
+    date_fin: PropTypes.string,
+    nombre_jours: PropTypes.number,
+    motif: PropTypes.string,
+    justificatif_url: PropTypes.string,
+  }).isRequired,
+  onBack: PropTypes.func.isRequired,
+  onStatusUpdate: PropTypes.func.isRequired,
+};

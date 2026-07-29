@@ -286,7 +286,7 @@ export default function DetailAvanceSalaire() {
 
               <div className="summary-bottom">
                 <div>
-                  <p className="label">Type d'avance</p>
+                  <p className="label">Type d&apos;avance</p>
                   <p className="value">Avance sur Salaire</p>
                 </div>
                 <div>
@@ -428,7 +428,7 @@ export default function DetailAvanceSalaire() {
           <div className="modal-box" onClick={(e) => e.stopPropagation()}>
             <span className="material-symbols-outlined modal-icon">warning</span>
             <h3>Confirmer la suppression</h3>
-            <p>Êtes-vous sûr de vouloir supprimer cette demande d'avance ? Cette action est irréversible.</p>
+            <p>Êtes-vous sûr de vouloir supprimer cette demande d&apos;avance ? Cette action est irréversible.</p>
             <div className="modal-actions">
               <button className="modal-btn cancel" onClick={() => setShowDeleteConfirm(false)}>
                 Annuler

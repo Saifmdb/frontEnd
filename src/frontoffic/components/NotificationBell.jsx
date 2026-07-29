@@ -1,5 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Bell, Check, CheckCheck, X } from 'lucide-react';
+import { useState, useRef, useEffect } from 'react';
+import { Bell, Check, CheckCheck } from 'lucide-react';
 import { useNotifications, requestNotificationPermission } from '../../hooks/useNotifications';
 import './frontcss/notificationBell.css';
 

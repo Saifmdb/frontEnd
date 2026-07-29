@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import Navbar from './components/navbar.jsx';
 import { authFetch } from '../api/authFetch.js';
@@ -25,6 +26,10 @@ function StatutBadge({ statut }) {
   const s = map[statut] || map.EN_ATTENTE;
   return <span className={`tc-pill ${s.cls}`}>{s.label}</span>;
 }
+
+StatutBadge.propTypes = {
+  statut: PropTypes.string,
+};
 
 export default function TraitementCredit() {
   const { id } = useParams();
@@ -308,7 +313,7 @@ export default function TraitementCredit() {
               <h3 className="tc-card-title">Éligibilité</h3>
               <div className="tc-stats-grid">
                 <div className="tc-stat-item">
-                  <p className="tc-stat-label">Année d'ancienneté</p>
+                  <p className="tc-stat-label">Année d&apos;ancienneté</p>
                   <div className="tc-stat-value">
                     <span className="tc-stat-number-sm">{employe?.profile?.anciennete ?? '—'}</span>
                     <span className="tc-stat-unit">{employe?.profile?.anciennete > 1 ? 'ans' : 'an'}</span>
@@ -329,7 +334,7 @@ export default function TraitementCredit() {
                   </div>
                 </div>
                 <div className="tc-stat-item">
-                  <p className="tc-stat-label">Taux d'endettement</p>
+                  <p className="tc-stat-label">Taux d&apos;endettement</p>
                   <div className="tc-stat-value">
                     <span className="tc-stat-number-sm">—</span>
                   </div>

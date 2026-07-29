@@ -78,7 +78,7 @@ export default function HistoriqueAvanceSalaire() {
               Historique des <span className="hist-title-red">Avances</span>
             </h1>
             <p className="hist-desc">
-              Consultez et suivez l'état de vos demandes d'avances sur salaire.
+              Consultez et suivez l&apos;état de vos demandes d&apos;avances sur salaire.
               Gérez votre flexibilité financière avec clarté et précision.
             </p>
           </div>
@@ -104,7 +104,7 @@ export default function HistoriqueAvanceSalaire() {
           <div className="hist-empty">
             <span className="material-symbols-outlined">receipt_long</span>
             <h3>Aucune demande</h3>
-            <p>Vous n'avez pas encore fait de demande d'avance sur salaire.</p>
+            <p>Vous n&apos;avez pas encore fait de demande d&apos;avance sur salaire.</p>
           </div>
         ) : (
           <div className="hist-timeline">

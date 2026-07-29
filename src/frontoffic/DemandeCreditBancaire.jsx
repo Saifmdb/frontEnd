@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './components/navbar.jsx';
 import { authFetch } from '../api/authFetch.js';
@@ -36,7 +36,7 @@ function getUserContext() {
       department: user?.depatement || user?.department || user?.profile?.depatement || user?.profile?.department || profile?.depatement || profile?.department || null,
       hasBankLoan: Boolean(user?.has_bank_loan),
     };
-  } catch (error) {
+  } catch {
     return { user: null, profile: null, username: null, matricule: null, role: null, department: null, hasBankLoan: false };
   }
 }
@@ -107,7 +107,7 @@ export default function DemandeCreditBancaire() {
           setManagerRequests(managerResult.demandes || []);
         }
       }
-    } catch (error) {
+    } catch {
       setMessage({ type: 'error', text: 'Impossible de charger les demandes.' });
     } finally {
       setLoading(false);
@@ -171,7 +171,7 @@ export default function DemandeCreditBancaire() {
       } else {
         setMessage({ type: 'error', text: data.error || 'Erreur lors de la soumission.' });
       }
-    } catch (error) {
+    } catch {
       setMessage({ type: 'error', text: 'Erreur de connexion au serveur.' });
     } finally {
       setSubmitting(false);
@@ -196,7 +196,7 @@ export default function DemandeCreditBancaire() {
       } else {
         setMessage({ type: 'error', text: data.error || 'Action impossible.' });
       }
-    } catch (error) {
+    } catch {
       setMessage({ type: 'error', text: 'Erreur de connexion au serveur.' });
     } finally {
       setActionLoading(null);
@@ -253,7 +253,7 @@ export default function DemandeCreditBancaire() {
                   <span>* Objet du prêt</span>
                   <div className="field-shell select-shell">
                     <select name="objet_pret" value={formData.objet_pret} onChange={handleChange} required>
-                      <option value="">Sélectionner l'objet</option>
+                      <option value="">Sélectionner l&apos;objet</option>
                       {objetPretOptions.map((option) => (
                         <option key={option} value={option}>{option}</option>
                       ))}
@@ -291,7 +291,7 @@ export default function DemandeCreditBancaire() {
                     />
                     <strong>DT</strong>
                   </div>
-                  <small>La simulation ci-dessus calcule l'opposition mensuelle estimée.</small>
+                  <small>La simulation ci-dessus calcule l&apos;opposition mensuelle estimée.</small>
                 </label>
 
                 <label>
@@ -312,7 +312,7 @@ export default function DemandeCreditBancaire() {
 
               <div className="credit-form-row two-columns">
                 <label>
-                  <span>Montant de l'opposition mensuelle (DT)</span>
+                  <span>Montant de l&apos;opposition mensuelle (DT)</span>
                   <div className="computed-value">
                     <p>Calcul automatique</p>
                     <strong>{formatCurrency(oppositionMensuelle)}</strong>

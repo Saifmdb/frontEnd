@@ -126,9 +126,9 @@ export default function Welcome() {
           />
           <div className="welcome-hero-overlay">
             <span>Evenement reseau</span>
-            <h2>L'Excellence Academique au Coeur de Notre Mission</h2>
+            <h2>L&apos;Excellence Academique au Coeur de Notre Mission</h2>
             <p>
-              Decouvrez les nouvelles initiatives pedagogiques 2024 pour l'ensemble du reseau Honoris United Universities.
+              Decouvrez les nouvelles initiatives pedagogiques 2024 pour l&apos;ensemble du reseau Honoris United Universities.
             </p>
             <button type="button">En savoir plus →</button>
           </div>
@@ -138,7 +138,7 @@ export default function Welcome() {
           <div className="welcome-section-head">
             <h3>Mes Services RH</h3>
             <div className="line"></div>
-            <button type="button">Voir tout l'annuaire</button>
+            <button type="button">Voir tout l&apos;annuaire</button>
           </div>
 
           <div className="welcome-services-grid">
@@ -184,9 +184,9 @@ export default function Welcome() {
                   <span className="welcome-tag">Reseau</span>
                   <small>Il y a 2 heures</small>
                 </div>
-                <h4>Nouveau partenariat strategique avec l'universite de Cape Town</h4>
+                <h4>Nouveau partenariat strategique avec l&apos;universite de Cape Town</h4>
                 <p>
-                  L'initiative vise a renforcer les echanges academiques et la recherche conjointe dans le domaine des sciences.
+                  L&apos;initiative vise a renforcer les echanges academiques et la recherche conjointe dans le domaine des sciences.
                 </p>
               </div>
             </article>
@@ -201,9 +201,9 @@ export default function Welcome() {
                   <span className="welcome-tag welcome-tag-red">Innovation</span>
                   <small>Hier</small>
                 </div>
-                <h4>Lancement du Hub d'Innovation Digitale a Casablanca</h4>
+                <h4>Lancement du Hub d&apos;Innovation Digitale a Casablanca</h4>
                 <p>
-                  Un espace dedie a la creativite et au developpement de nouvelles solutions pour l'education en Afrique.
+                  Un espace dedie a la creativite et au developpement de nouvelles solutions pour l&apos;education en Afrique.
                 </p>
               </div>
             </article>
@@ -241,7 +241,7 @@ export default function Welcome() {
         <p>© 2024 Honoris United Universities. Education for Impact.</p>
         <div>
           <a href="#">Politique de confidentialite</a>
-          <a href="#">Conditions d'utilisation</a>
+          <a href="#">Conditions d&apos;utilisation</a>
           <a href="#">Support Academique</a>
         </div>
       </footer>

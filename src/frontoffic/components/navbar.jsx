@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
-import { ChevronDown, Search, LogOut, Bell, Check, CheckCheck, User } from "lucide-react";
+import PropTypes from "prop-types";
+import { ChevronDown, LogOut, Bell, Check, CheckCheck, User } from "lucide-react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useNotifications, requestNotificationPermission } from "../../hooks/useNotifications.js";
 import { useAuth } from "../../hooks/useAuth.js";
@@ -512,3 +513,7 @@ const handleLogout = async () => {
     </nav>
   );
 }
+
+Navbar.propTypes = {
+  hideDisconnectBtn: PropTypes.bool,
+};

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AlertCircle } from "lucide-react";
 import Navbar from "./components/navbar.jsx";
 import { authFetch } from "../api/authFetch.js";
@@ -123,7 +123,7 @@ export default function Manager() {
   );
 
   const renderOrgContent = () => {
-    if (!chartModel) return <p className="empty-message">Aucune donnée d'organigramme disponible.</p>;
+    if (!chartModel) return <p className="empty-message">Aucune donnée d&apos;organigramme disponible.</p>;
 
     const hasManager = Boolean(chartModel.mainManager);
     const hasEmployees = chartModel.employees.length > 0;
@@ -195,7 +195,7 @@ export default function Manager() {
             Notre Structure <span>Academique</span>
           </h2>
           <p>
-            Decouvrez la hierarchie organisationnelle d'Honoris United Universities avec une gouvernance unifiee pour un impact durable.
+            Decouvrez la hierarchie organisationnelle d&apos;Honoris United Universities avec une gouvernance unifiee pour un impact durable.
           </p>
         </section>
 
@@ -206,18 +206,18 @@ export default function Manager() {
               <AlertCircle size={24} />
               <p className="error-message">{error}</p>
               <p className="error-help">
-                Vous n'etes pas connecte. <a href="/signin">Connectez-vous ici</a>
+                Vous n&apos;etes pas connecte. <a href="/signin">Connectez-vous ici</a>
               </p>
             </div>
           )}
           {!loading && !error && renderOrgContent()}
           {!loading && !error && !orgChart && (
-            <p className="empty-message">Aucune donnee d'organigramme disponible.</p>
+            <p className="empty-message">Aucune donnee d&apos;organigramme disponible.</p>
           )}
           {!loading && !error && orgChart && !["ORGANIZER", "EMPLOYEE"].includes(userRole) && (
             <div className="warning-box">
               <AlertCircle size={32} />
-              <p>Votre role actuel ne permet pas d'afficher l'organigramme detaille.</p>
+              <p>Votre role actuel ne permet pas d&apos;afficher l&apos;organigramme detaille.</p>
             </div>
           )}
         </section>

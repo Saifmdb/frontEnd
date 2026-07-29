@@ -62,7 +62,7 @@ function getAvatarColor(index) {
 
 export default function GestionAvancesSalaire() {
   const navigate = useNavigate();
-  const { role, department, fullName } = useMemo(() => getUserContext(), []);
+  const { role, department } = useMemo(() => getUserContext(), []);
   const isRhManager = role === 'ORGANIZER' && String(department || '').toUpperCase() === 'RH';
   const isApprover = role === 'ADMIN' || isRhManager;
   const [requests, setRequests] = useState([]);
@@ -115,7 +115,6 @@ export default function GestionAvancesSalaire() {
     return months.sort().reverse();
   }, [requests]);
 
-  const pageTitle = isApprover ? 'Gestion des Avances sur Salaire' : 'Mes Avances sur Salaire';
   const pageSubtitle = isApprover
     ? "Interface de supervision des requêtes financières. Validez, examinez et archivez les demandes de vos collaborateurs au sein du réseau Honoris."
     : "Suivez l'état de vos demandes d'avance sur salaire.";

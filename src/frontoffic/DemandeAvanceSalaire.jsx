@@ -1,40 +1,16 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from './components/navbar.jsx';
 import { authFetch } from '../api/authFetch.js';
 import './frontcss/demande-avance-salaire.css';
 
 const API_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
 
-function getUserContext() {
-  try {
-    const userData = localStorage.getItem('user');
-    const profileData = localStorage.getItem('employee_profile');
-    const user = userData ? JSON.parse(userData) : null;
-    const profile = profileData ? JSON.parse(profileData) : null;
-    return {
-      user, profile,
-      username: user?.username || null,
-      matricule: user?.matricule || profile?.matricule || null,
-      role: user?.role || null,
-      department: user?.depatement || profile?.depatement || null,
-      salaire: user?.salaire || profile?.salaire || null,
-    };
-  } catch {
-    return { user: null, profile: null, username: null, matricule: null, role: null, department: null, salaire: null };
-  }
-}
-
 export default function DemandeAvanceSalaire() {
-  const { salaire } = useMemo(() => getUserContext(), []);
   const [mois, setMois] = useState('');
   const [montant, setMontant] = useState('');
   const [message, setMessage] = useState(null);
   const [submitting, setSubmitting] = useState(false);
   const [eligibility, setEligibility] = useState(null);
-
-  const salaireNum = Number(salaire || 0);
-  const montantNum = Number(montant || 0);
-  const montantMax60 = salaireNum * 0.6;
 
   const checkEligibility = async (m, moisVal) => {
     if (!m || !moisVal) { setEligibility(null); return; }
@@ -42,7 +18,9 @@ export default function DemandeAvanceSalaire() {
       const res = await authFetch(`${API_URL}/avance-salaire/eligibilite/?montant=${m}&mois=${moisVal}`);
       const data = await res.json();
       if (data.success) setEligibility(data);
-    } catch {}
+    } catch {
+      /* ignore */
+    }
   };
 
   useEffect(() => {
@@ -90,12 +68,12 @@ export default function DemandeAvanceSalaire() {
         <header className="avance-header">
           <div className="avance-header-left">
             <h1 className="avance-title">
-              Demande d'Avance <br />
+              Demande d&apos;Avance <br />
               <span className="avance-title-red">sur Salaire</span>
             </h1>
             <p className="avance-desc">
               Sollicitez une avance sur votre salaire de manière simple et sécurisée. Le montant
-              demandé est soumis à validation et aux politiques internes de l'institution.
+              demandé est soumis à validation et aux politiques internes de l&apos;institution.
             </p>
           </div>
 
@@ -122,13 +100,13 @@ export default function DemandeAvanceSalaire() {
         <div className="avance-card">
           <div className="avance-card-head">
             <span className="material-symbols-outlined">account_balance_wallet</span>
-            <h2>Détails de l'Avance</h2>
+            <h2>Détails de l&apos;Avance</h2>
           </div>
 
           <form className="avance-card-body" onSubmit={handleSubmit}>
             <div className="avance-fields">
               <div className="avance-field">
-                <label className="avance-label">* Mois de l'avance :</label>
+                <label className="avance-label">* Mois de l&apos;avance :</label>
                 <div className="avance-input-wrap">
                   <input
                     type="month"

@@ -1,6 +1,6 @@
 // Pour corriger les liens de fichiers relatifs venant du backend
 const FILE_BASE = import.meta.env.VITE_API_FILE_URL || 'http://localhost:8000';
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Link, useParams, useNavigate } from 'react-router-dom';
 import Navbar from './components/navbar';
 import { authFetch } from '../api/authFetch.js';
@@ -58,7 +58,9 @@ export default function RepondreDemandeDetail() {
           const data = await res.json();
           if (data.success && data.demande) { setDemande(data.demande); return; }
         }
-      } catch (_) {}
+      } catch {
+        /* ignore */
+      }
 
       try {
         const res  = await authFetch(`${API_BASE}/documents-rh/demandes/rh/`);
@@ -68,7 +70,7 @@ export default function RepondreDemandeDetail() {
           if (found) { setDemande(found); }
           else        { setNotFound(true); }
         }
-      } catch (_) { setNotFound(true); }
+      } catch { setNotFound(true); }
       finally     { setLoading(false); }
     })();
   }, [id]);
@@ -140,7 +142,7 @@ export default function RepondreDemandeDetail() {
           navigate('/gestion-demande-document', { state: { responseSuccess: true } });
         }, 2200);
       }
-    } catch (_) {
+    } catch {
       setSendError('Impossible de joindre le serveur. Vérifiez votre connexion.');
     }
     setSending(false);
@@ -197,7 +199,7 @@ export default function RepondreDemandeDetail() {
         <div className="text-center">
           <span className="material-symbols-outlined text-6xl text-slate-300 mb-4 block">find_in_page</span>
           <h2 className="text-xl font-bold text-slate-600 mb-2">Demande introuvable</h2>
-          <p className="text-sm text-slate-400 mb-6">La demande #{id} n'existe pas ou vous n'y avez pas accès.</p>
+          <p className="text-sm text-slate-400 mb-6">La demande #{id} n&apos;existe pas ou vous n&apos;y avez pas accès.</p>
       
         </div>
       </div>
@@ -373,7 +375,7 @@ export default function RepondreDemandeDetail() {
                 <div>
                   <p className="text-sm font-bold text-[#3f6653] mb-1">Envoi automatique par e-mail</p>
                   <p className="text-xs text-[#3f6653]/70 leading-relaxed">
-                    Si vous uploadez un document, il sera joint à l'e-mail de réponse envoyé à l'employé. Assurez-vous que le fichier est signé et finalisé.
+                    Si vous uploadez un document, il sera joint à l&apos;e-mail de réponse envoyé à l&apos;employé. Assurez-vous que le fichier est signé et finalisé.
                   </p>
                 </div>
               </div>
@@ -383,7 +385,7 @@ export default function RepondreDemandeDetail() {
                 <div>
                   <p className="text-sm font-bold text-[#7e0008] mb-1">Retrait physique au siège</p>
                   <p className="text-xs text-[#7e0008]/60 leading-relaxed">
-                    L'employé sera notifié par e-mail de votre réponse et devra se présenter au service RH muni d'une pièce d'identité.
+                    L&apos;employé sera notifié par e-mail de votre réponse et devra se présenter au service RH muni d&apos;une pièce d&apos;identité.
                   </p>
                 </div>
               </div>
@@ -447,7 +449,7 @@ export default function RepondreDemandeDetail() {
 
                     {/* Commentaire RH */}
                     <div>
-                      <p className="text-[0.7rem] font-black uppercase tracking-widest text-slate-400 mb-3">Message d'accompagnement</p>
+                      <p className="text-[0.7rem] font-black uppercase tracking-widest text-slate-400 mb-3">Message d&apos;accompagnement</p>
                       {demande?.commentaire_rh ? (
                         <div className="bg-slate-50 border border-slate-100 rounded-xl px-5 py-4 text-sm text-[#191c1d] leading-relaxed whitespace-pre-wrap">
                           {demande.commentaire_rh}
@@ -559,7 +561,7 @@ export default function RepondreDemandeDetail() {
                   {/* Message */}
                   <div>
                     <label className="block text-[0.7rem] font-black uppercase tracking-widest text-slate-400 mb-3">
-                      Message d'accompagnement
+                      Message d&apos;accompagnement
                     </label>
                     <textarea
                       rows={5}
@@ -575,7 +577,7 @@ export default function RepondreDemandeDetail() {
                     <label className="block text-[0.7rem] font-black uppercase tracking-widest text-slate-400 mb-2">
                       Téléverser le document
                       {isByEmail
-                        ? <span className="ml-2 text-[#3f6653] normal-case font-semibold tracking-normal text-xs">— sera envoyé par e-mail à l'employé</span>
+                        ? <span className="ml-2 text-[#3f6653] normal-case font-semibold tracking-normal text-xs">— sera envoyé par e-mail à l&apos;employé</span>
                         : <span className="ml-2 text-[#7e0008]/60 normal-case font-semibold tracking-normal text-xs">— non requis pour retrait</span>
                       }
                     </label>
@@ -599,7 +601,7 @@ export default function RepondreDemandeDetail() {
                           <p className="font-bold text-sm text-[#191c1d] mb-1">
                             {dragOver ? 'Déposez le fichier ici' : 'Cliquez pour téléverser ou glissez-déposez'}
                           </p>
-                          <p className="text-xs text-slate-400">PDF, DOCX jusqu'à 10 MB</p>
+                          <p className="text-xs text-slate-400">PDF, DOCX jusqu&apos;à 10 MB</p>
                           <input ref={fileInputRef} type="file" multiple accept=".pdf,.docx,.doc" className="hidden" onChange={handleFileChange} />
                         </div>
                       ) : (
@@ -632,7 +634,7 @@ export default function RepondreDemandeDetail() {
                     ) : (
                       <div className="rdd-upload-notice">
                         <span className="material-symbols-outlined">info</span>
-                        <p>Cette demande est en retrait local. Le téléversement de document n'est pas nécessaire.</p>
+                        <p>Cette demande est en retrait local. Le téléversement de document n&apos;est pas nécessaire.</p>
                       </div>
                     )}
                   </div>
@@ -671,7 +673,7 @@ export default function RepondreDemandeDetail() {
       {/* ── Footer ── */}
       <footer className="bg-slate-100 border-t border-slate-200 mt-auto">
         <div className="flex flex-col md:flex-row justify-between items-center px-10 py-7 gap-4 max-w-7xl mx-auto">
-          <p className="text-xs text-slate-400">© 2024 Honoris United Universities. Réseau d'enseignement supérieur privé panafricain.</p>
+          <p className="text-xs text-slate-400">© 2024 Honoris United Universities. Réseau d&apos;enseignement supérieur privé panafricain.</p>
           <div className="flex gap-6">
             {['Politique de confidentialité', "Conditions d'utilisation", 'Support technique'].map(t => (
               <a key={t} href="#" className="text-xs text-slate-400 hover:text-[#7e0008] transition-colors">{t}</a>

@@ -1,3 +1,4 @@
+import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import "../frontcss/NavAdmin.css";
 
@@ -70,3 +71,14 @@ export default function NavAdmin({
     </aside>
   );
 }
+
+NavAdmin.propTypes = {
+  profileInfo: PropTypes.shape({
+    name: PropTypes.string,
+    role: PropTypes.string,
+  }).isRequired,
+  onLogout: PropTypes.func.isRequired,
+  active: PropTypes.string,
+  showAddUser: PropTypes.bool,
+  onAddUser: PropTypes.func,
+};
