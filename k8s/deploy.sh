@@ -14,7 +14,7 @@ NS=honoris
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 STEP=0
-TOTAL=6
+TOTAL=7
 
 # ── UI helpers (same as Backend/k8s/deploy.sh, kept in sync) ───────────────
 BLUE='\033[0;34m'; GREEN='\033[0;32m'; RED='\033[0;31m'; DIM='\033[2m'; NC='\033[0m'
@@ -76,6 +76,16 @@ if [ ! -f "$DIR/secret.yaml" ]; then
     "cp $DIR/secret.example.yaml $DIR/secret.yaml, remplis VITE_MSAL_CLIENT_ID (et AUTHORITY si besoin), puis relance."
 fi
 echo -e "${GREEN}✓${NC} registry, honoris-backend, honoris-media présents ; secret.yaml présent"
+
+# ── Down: clean slate before redeploying ──────────────────────────────────
+# Own resources only — never touches PVCs/Secrets/ConfigMaps or anything
+# from the Backend repo.
+step_header "Arrêt des ressources existantes (down)"
+kubectl delete deployment honoris-frontend -n "$NS" --ignore-not-found >/dev/null 2>&1
+kubectl delete job frontend-image-build -n "$NS" --ignore-not-found >/dev/null 2>&1
+kubectl delete service honoris-frontend -n "$NS" --ignore-not-found >/dev/null 2>&1
+kubectl delete ingress honoris-frontend -n "$NS" --ignore-not-found >/dev/null 2>&1
+echo -e "${GREEN}✓${NC} ressources arrêtées"
 
 # ── 1. Namespace + secret ──────────────────────────────────────────────────
 step_header "Namespace + secret"
