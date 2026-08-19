@@ -1,0 +1,61 @@
+# Depends on the Backend repo's manifests already being applied in this
+# namespace: the honoris-media PVC (mounted read-only below) and the
+# honoris-backend Service (proxied to by nginx.conf) must both exist first.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: honoris-frontend
+  namespace: honoris
+  labels:
+    app: honoris-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: honoris-frontend
+  template:
+    metadata:
+      labels:
+        app: honoris-frontend
+    spec:
+      containers:
+        - name: frontend
+          # Built in-cluster by build-job.yaml, not pulled from Docker Hub —
+          # pushed to the registry Deployed by the Backend repo's
+          # k8s/registry/ manifests.
+          image: 10.96.100.100:5000/saif-frontend:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: nginx-config
+              mountPath: /etc/nginx/nginx.conf
+              subPath: nginx.conf
+            - name: media
+              mountPath: /usr/share/nginx/media
+              readOnly: true
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            periodSeconds: 15
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "250m"
+              memory: "256Mi"
+      volumes:
+        - name: nginx-config
+          configMap:
+            name: honoris-frontend-nginx
+        - name: media
+          persistentVolumeClaim:
+            claimName: honoris-media
+            readOnly: true

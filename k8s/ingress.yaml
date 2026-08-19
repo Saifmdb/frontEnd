@@ -1,0 +1,35 @@
+# This is the single public entrypoint for browser traffic: nginx inside the
+# frontend pod serves the built SPA and reverse-proxies /api/, /admin/,
+# /static/, /media/, /ws/ to the backend internally (see configmap-nginx.yaml),
+# so the browser only ever talks to this one host — no CORS, no separate
+# cross-site cookie handling for the Django session-based login flows.
+#
+# The read/send timeout annotations matter for the same reason as the
+# backend's own ingress: /ws/notifications/ is a long-lived WebSocket
+# connection and would otherwise get killed after nginx-ingress's default 60s.
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: honoris-frontend
+  namespace: honoris
+  annotations:
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "3600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "3600"
+    # cert-manager.io/cluster-issuer: letsencrypt-prod
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: honoris.example.com
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: honoris-frontend
+                port:
+                  number: 80
+  # tls:
+  #   - hosts:
+  #       - honoris.example.com
+  #     secretName: honoris-frontend-tls

@@ -34,26 +34,8 @@ jobs:
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
           SONAR_HOST_URL: https://sonarcloud.io
 
-  docker:
-    needs: [build, sonarcloud]
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-
-      - uses: docker/setup-buildx-action@v3
-
-      - uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - uses: docker/build-push-action@v6
-        with:
-          context: .
-          push: true
-          tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/saif-frontend:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/saif-frontend:${{ github.sha }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
+  # No docker/Docker Hub job: the image is built in-cluster from this repo's
+  # GitHub URL by k8s/build-job.yaml (Kaniko), pushed straight to the
+  # in-cluster registry Deployed by the Backend repo. VITE_MSAL_CLIENT_ID/
+  # VITE_MSAL_AUTHORITY now come from a k8s Secret consumed by that Job
+  # instead of these GitHub Actions secrets — see k8s/README.md.

@@ -1,5 +1,9 @@
 .env
 
+# Real k8s secret manifest — copy from k8s/secret.example.yaml and fill in
+# real values locally; never commit that. (See k8s/README.md.)
+k8s/secret.yaml
+
 # Logs
 logs
 *.log

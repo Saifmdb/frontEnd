@@ -1,0 +1,123 @@
+# Overrides the image's baked-in nginx.conf at container start (mounted over
+# /etc/nginx/nginx.conf) — this is the one piece of "backend wiring" that's
+# safely runtime-configurable without rebuilding the frontend image: unlike
+# VITE_* values, nginx re-reads this file when the container starts, not at
+# `npm run build` time.
+#
+# Differences from the repo's own nginx.conf (used for docker-compose):
+#  - proxies to the honoris-backend Service instead of the Compose "backend"
+#    hostname
+#  - serves /media/ directly from the honoris-media PVC (shared with the
+#    backend Deployment) instead of proxying it — Django doesn't serve
+#    /media/ itself once DEBUG=False
+#  - drops the optional :443 TLS server block; TLS terminates at the Ingress
+#    in k8s, so this container only ever needs to serve plain HTTP
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: honoris-frontend-nginx
+  namespace: honoris
+data:
+  nginx.conf: |
+    events {
+        worker_connections 1024;
+    }
+
+    http {
+        include       /etc/nginx/mime.types;
+        default_type  application/octet-stream;
+
+        log_format main '$remote_addr - $remote_user [$time_local] "$request" '
+                        '$status $body_bytes_sent "$http_referer" '
+                        '"$http_user_agent" "$http_x_forwarded_for"';
+
+        access_log /var/log/nginx/access.log main;
+        error_log /var/log/nginx/error.log;
+
+        sendfile on;
+        tcp_nopush on;
+        tcp_nodelay on;
+        keepalive_timeout 65;
+        types_hash_max_size 2048;
+
+        gzip on;
+        gzip_vary on;
+        gzip_min_length 1024;
+        gzip_types text/plain text/css text/xml text/javascript
+                   application/javascript application/xml+rss
+                   application/json application/xml;
+
+        server {
+            listen 80;
+            server_name _;
+
+            client_max_body_size 100M;
+
+            location / {
+                root /usr/share/nginx/html;
+                index index.html index.htm;
+                try_files $uri $uri/ /index.html;
+            }
+
+            location ~* \.(js|css|png|jpg|jpeg|gif|ico|svg)$ {
+                root /usr/share/nginx/html;
+                expires 1y;
+                add_header Cache-Control "public, immutable";
+            }
+
+            # Django REST endpoints.
+            location /api/ {
+                proxy_pass http://honoris-backend:8000;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_read_timeout 300s;
+                proxy_connect_timeout 75s;
+            }
+
+            # Django admin.
+            location /admin/ {
+                proxy_pass http://honoris-backend:8000;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+            }
+
+            # WebSocket notifications (conges/consumers.py, ws/notifications/).
+            location /ws/ {
+                proxy_pass http://honoris-backend:8000;
+                proxy_http_version 1.1;
+                proxy_set_header Upgrade $http_upgrade;
+                proxy_set_header Connection "upgrade";
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+                proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+                proxy_set_header X-Forwarded-Proto $scheme;
+                proxy_read_timeout 3600s;
+            }
+
+            # Django's whitenoise-served static (admin CSS/JS) — works from
+            # the backend process regardless of DEBUG, so proxy rather than
+            # serve from a volume.
+            location /static/ {
+                proxy_pass http://honoris-backend:8000;
+                proxy_set_header Host $host;
+            }
+
+            # Uploaded files — served directly from the PVC shared with the
+            # backend Deployment (see deployment.yaml's volumeMounts).
+            location /media/ {
+                alias /usr/share/nginx/media/;
+                expires 1y;
+                add_header Cache-Control "public, immutable";
+            }
+
+            add_header X-Frame-Options "SAMEORIGIN" always;
+            add_header X-XSS-Protection "1; mode=block" always;
+            add_header X-Content-Type-Options "nosniff" always;
+            add_header Referrer-Policy "no-referrer-when-downgrade" always;
+            add_header Content-Security-Policy "default-src 'self' http: https: data: blob: 'unsafe-inline'" always;
+        }
+    }

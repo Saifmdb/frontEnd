@@ -1,0 +1,49 @@
+# Builds directly from the GitHub repo (no local Docker daemon, no Docker
+# Hub) and pushes to the in-cluster registry from ../../Backend/k8s/registry.
+#
+# Re-run after every push you want deployed (Jobs are immutable once
+# completed, so delete first):
+#   kubectl delete job frontend-image-build -n honoris --ignore-not-found
+#   kubectl apply -f build-job.yaml
+#   kubectl wait --for=condition=complete job/frontend-image-build -n honoris --timeout=900s
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: frontend-image-build
+  namespace: honoris
+spec:
+  backoffLimit: 1
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: kaniko
+          image: gcr.io/kaniko-project/executor:v1.23.2
+          env:
+            - name: VITE_MSAL_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: honoris-frontend-build-secrets
+                  key: VITE_MSAL_CLIENT_ID
+            - name: VITE_MSAL_AUTHORITY
+              valueFrom:
+                secretKeyRef:
+                  name: honoris-frontend-build-secrets
+                  key: VITE_MSAL_AUTHORITY
+          # $(VAR) here is expanded by Kubernetes from the env: above before
+          # the container ever starts — not a shell/Kaniko feature.
+          args:
+            - "--context=git://github.com/Saifmdb/frontEnd.git#refs/heads/main"
+            - "--dockerfile=Dockerfile"
+            - "--destination=10.96.100.100:5000/saif-frontend:latest"
+            - "--insecure"
+            - "--insecure-pull"
+            - "--build-arg=VITE_MSAL_CLIENT_ID=$(VITE_MSAL_CLIENT_ID)"
+            - "--build-arg=VITE_MSAL_AUTHORITY=$(VITE_MSAL_AUTHORITY)"
+          resources:
+            requests:
+              cpu: "250m"
+              memory: "512Mi"
+            limits:
+              cpu: "1"
+              memory: "1Gi"

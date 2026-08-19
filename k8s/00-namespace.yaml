@@ -1,0 +1,9 @@
+# Same namespace as the Backend repo's k8s manifests (../../Backend/k8s) — the
+# frontend's nginx talks to the backend over its in-cluster Service DNS name
+# (honoris-backend), which only resolves without a namespace suffix if both
+# are in "honoris". Safe to re-apply even if the Backend manifests already
+# created it.
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: honoris
