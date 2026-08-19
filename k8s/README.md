@@ -31,7 +31,31 @@ have been run first — see below.
    much as the backend's does.
 2. ingress-nginx installed in the cluster.
 3. Update `honoris.example.com` in `ingress.yaml` to your real domain.
-4. **Before building the image**, copy `secret.example.yaml` to `secret.yaml`
+4. **TLS is required for Microsoft login to work at all, not just nice-to-have**:
+   `msal-browser` needs `window.crypto.subtle` (Web Crypto API) for PKCE, which
+   browsers only expose in a secure context (HTTPS, or `localhost`) — over
+   plain HTTP the "Sign in with Microsoft" button initializes and then fails
+   with `BrowserAuthError: crypto_nonexistent`, silently staying disabled.
+   `ingress.yaml`'s `tls:` block expects a `honoris-frontend-tls` Secret; for
+   this fake/local domain a self-signed cert is enough (the browser will show
+   a one-time "not secure" warning to click through) — generate one with:
+   ```bash
+   openssl req -x509 -nodes -days 825 -newkey rsa:2048 \
+     -keyout /tmp/tls.key -out /tmp/tls.crt \
+     -subj "/CN=honoris.example.com" \
+     -addext "subjectAltName=DNS:honoris.example.com"
+   kubectl create secret tls honoris-frontend-tls -n honoris \
+     --cert=/tmp/tls.crt --key=/tmp/tls.key
+   rm /tmp/tls.key /tmp/tls.crt
+   ```
+   For a real domain, use cert-manager + a real CA instead (Let's Encrypt
+   can't verify a domain like `honoris.example.com` that only resolves via
+   `/etc/hosts`) — swap the commented-out `cert-manager.io/cluster-issuer`
+   annotation back in.
+   > Also add the exact origin you're serving from (`https://honoris.example.com`,
+   > or whatever real domain you use) as a **Redirect URI (SPA platform)** on
+   > the Azure AD app registration — MSAL rejects a mismatched redirect URI.
+5. **Before building the image**, copy `secret.example.yaml` to `secret.yaml`
    and fill in the real `VITE_MSAL_CLIENT_ID` (and, if your Azure AD tenant
    isn't `common`, `VITE_MSAL_AUTHORITY`) — `build-job.yaml` reads these from
    that Secret. This is the one thing here that's baked in at image **build**
@@ -58,6 +82,9 @@ kubectl apply -f 00-namespace.yaml
 
 cp secret.example.yaml secret.yaml   # edit with real MSAL values, then:
 kubectl apply -f secret.yaml
+
+# TLS secret for MSAL (see step 4 above) — must exist before applying ingress.yaml:
+kubectl create secret tls honoris-frontend-tls -n honoris --cert=... --key=...
 
 kubectl apply -f build-job.yaml
 kubectl wait --for=condition=complete job/frontend-image-build -n honoris --timeout=900s

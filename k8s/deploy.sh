@@ -75,7 +75,10 @@ if [ ! -f "$DIR/secret.yaml" ]; then
   fail "Secret manquant : secret.yaml" \
     "cp $DIR/secret.example.yaml $DIR/secret.yaml, remplis VITE_MSAL_CLIENT_ID (et AUTHORITY si besoin), puis relance."
 fi
-echo -e "${GREEN}✓${NC} registry, honoris-backend, honoris-media présents ; secret.yaml présent"
+kubectl get secret honoris-frontend-tls -n "$NS" >/dev/null 2>&1 \
+  || fail "Secret TLS manquant : honoris-frontend-tls" \
+    "MSAL a besoin d'un contexte HTTPS pour fonctionner (voir README.md, section 4) — génère un cert auto-signé et crée le secret avant de relancer."
+echo -e "${GREEN}✓${NC} registry, honoris-backend, honoris-media, honoris-frontend-tls présents ; secret.yaml présent"
 
 # ── Down: clean slate before redeploying ──────────────────────────────────
 # Own resources only — never touches PVCs/Secrets/ConfigMaps or anything
@@ -98,8 +101,8 @@ step_header "Build de l'image frontend depuis GitHub (Kaniko)"
 kubectl delete job frontend-image-build -n "$NS" --ignore-not-found >/dev/null 2>&1
 run_or_fail "apply build job" kubectl apply -f "$DIR/build-job.yaml"
 wait_for "Image frontend construite" \
-  "kubectl get job frontend-image-build -n $NS -o jsonpath='{.status.succeeded}' | grep -q 1" 600 \
-  || fail "Build frontend échoué/trop long" "kubectl logs job/frontend-image-build -n $NS | tail -30"
+  "kubectl get job frontend-image-build -n $NS -o jsonpath='{.status.succeeded}' | grep -q 1" 1200 \
+  || fail "Build frontend échoué/trop long" "$(kubectl logs job/frontend-image-build -n "$NS" 2>&1 | tail -30)"
 
 # ── 3. nginx config ─────────────────────────────────────────────────────────
 step_header "Configuration nginx"
@@ -112,11 +115,11 @@ run_or_fail "apply app" kubectl apply -f "$DIR/deployment.yaml" -f "$DIR/service
 kubectl rollout restart deployment/honoris-frontend -n "$NS" >/dev/null 2>&1
 wait_for "Frontend disponible" \
   "kubectl get deployment honoris-frontend -n $NS -o jsonpath='{.status.availableReplicas}' | grep -q 2" 180 \
-  || fail "Frontend pas prêt à temps" "kubectl get pods -n $NS -l app=honoris-frontend; kubectl logs -n $NS -l app=honoris-frontend --tail=30"
+  || fail "Frontend pas prêt à temps" "$(kubectl get pods -n "$NS" -l app=honoris-frontend 2>&1; kubectl logs -n "$NS" -l app=honoris-frontend --tail=30 2>&1)"
 
 # ── Done ──────────────────────────────────────────────────────────────────
 step_header "Terminé"
 echo -e "${GREEN}Frontend déployé.${NC}\n"
 kubectl get pods -n "$NS" -l app=honoris-frontend
 echo -e "\n${DIM}URL (nécessite ingress-nginx + 'minikube tunnel' + entrée /etc/hosts — voir README.md) :${NC}"
-echo "  http://honoris.example.com"
+echo "  https://honoris.example.com  (self-signed cert — see README.md for why TLS is required, not optional, here)"

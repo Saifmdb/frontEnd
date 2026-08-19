@@ -7,6 +7,16 @@
 # The read/send timeout annotations matter for the same reason as the
 # backend's own ingress: /ws/notifications/ is a long-lived WebSocket
 # connection and would otherwise get killed after nginx-ingress's default 60s.
+#
+# TLS is required, not optional, here: MSAL/msal-browser needs the Web
+# Crypto API (window.crypto.subtle) to generate PKCE challenges, and browsers
+# only expose that in a "secure context" (HTTPS, or localhost) — over plain
+# HTTP this fails at runtime with BrowserAuthError: crypto_nonexistent, and
+# the "Sign in with Microsoft" button never becomes clickable. honoris-frontend-tls
+# is a self-signed cert (fine for this fake/local domain — real TLS would need
+# cert-manager + a domain Let's Encrypt can actually verify, see README.md),
+# so the browser will show a one-time "not secure" warning to click through.
+# ingress-nginx redirects http->https automatically once tls: is set below.
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -29,7 +39,7 @@ spec:
                 name: honoris-frontend
                 port:
                   number: 80
-  # tls:
-  #   - hosts:
-  #       - honoris.example.com
-  #     secretName: honoris-frontend-tls
+  tls:
+    - hosts:
+        - honoris.example.com
+      secretName: honoris-frontend-tls

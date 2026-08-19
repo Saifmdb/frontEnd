@@ -40,6 +40,11 @@ spec:
             - "--insecure-pull"
             - "--build-arg=VITE_MSAL_CLIENT_ID=$(VITE_MSAL_CLIENT_ID)"
             - "--build-arg=VITE_MSAL_AUTHORITY=$(VITE_MSAL_AUTHORITY)"
+            # Caches the `npm install` layer (package*.json copied before the
+            # rest of the source) — reused across rebuilds as long as
+            # package-lock.json doesn't change.
+            - "--cache=true"
+            - "--cache-repo=10.96.100.100:5000/kaniko-cache"
           resources:
             requests:
               cpu: "250m"
