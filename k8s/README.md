@@ -9,6 +9,11 @@ flows.
 The image itself is built **in-cluster, directly from this repo's GitHub URL**
 by `build-job.yaml` (Kaniko) — no Docker Hub, no local `docker build`.
 
+**`./deploy.sh`** runs the whole sequence below in one command with a live
+progress bar, checks the Backend prerequisites first, and is safe to re-run
+(e.g. after a new push). Requires the Backend repo's own `k8s/deploy.sh` to
+have been run first — see below.
+
 ## Prerequisites
 
 1. **The Backend repo's manifests must be applied first**, in the same
