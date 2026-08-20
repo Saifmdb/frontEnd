@@ -75,9 +75,22 @@ if [ ! -f "$DIR/secret.yaml" ]; then
   fail "Secret manquant : secret.yaml" \
     "cp $DIR/secret.example.yaml $DIR/secret.yaml, remplis VITE_MSAL_CLIENT_ID (et AUTHORITY si besoin), puis relance."
 fi
-kubectl get secret honoris-frontend-tls -n "$NS" >/dev/null 2>&1 \
-  || fail "Secret TLS manquant : honoris-frontend-tls" \
-    "MSAL a besoin d'un contexte HTTPS pour fonctionner (voir README.md, section 4) — génère un cert auto-signé et crée le secret avant de relancer."
+if ! kubectl get secret honoris-frontend-tls -n "$NS" >/dev/null 2>&1; then
+  TLS_HOST=$(grep -m1 'host:' "$DIR/ingress.yaml" | awk -F'host:' '{print $2}' | tr -d ' ')
+  echo -e "${DIM}Secret TLS honoris-frontend-tls absent — génération d'un cert auto-signé pour ${TLS_HOST} (MSAL a besoin d'HTTPS, voir README.md section 4)...${NC}"
+  TLS_DIR=$(mktemp -d)
+  openssl req -x509 -nodes -days 825 -newkey rsa:2048 \
+    -keyout "$TLS_DIR/tls.key" -out "$TLS_DIR/tls.crt" \
+    -subj "/CN=${TLS_HOST}" -addext "subjectAltName=DNS:${TLS_HOST}" \
+    >/tmp/deploy-front-step.log 2>&1 \
+    || fail "Génération du cert auto-signé échouée" "$(tail -5 /tmp/deploy-front-step.log)"
+  kubectl create secret tls honoris-frontend-tls -n "$NS" \
+    --cert="$TLS_DIR/tls.crt" --key="$TLS_DIR/tls.key" \
+    >/tmp/deploy-front-step.log 2>&1 \
+    || fail "Création du secret honoris-frontend-tls échouée" "$(tail -5 /tmp/deploy-front-step.log)"
+  rm -rf "$TLS_DIR"
+  echo -e "${GREEN}✓${NC} secret honoris-frontend-tls généré (cert auto-signé, usage local uniquement — pour un vrai domaine utilise cert-manager, voir README.md section 4)"
+fi
 echo -e "${GREEN}✓${NC} registry, honoris-backend, honoris-media, honoris-frontend-tls présents ; secret.yaml présent"
 
 # ── Down: clean slate before redeploying ──────────────────────────────────

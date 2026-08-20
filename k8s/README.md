@@ -38,7 +38,10 @@ have been run first — see below.
    with `BrowserAuthError: crypto_nonexistent`, silently staying disabled.
    `ingress.yaml`'s `tls:` block expects a `honoris-frontend-tls` Secret; for
    this fake/local domain a self-signed cert is enough (the browser will show
-   a one-time "not secure" warning to click through) — generate one with:
+   a one-time "not secure" warning to click through). **`./deploy.sh` now
+   generates this automatically** (matching whatever host is set in
+   `ingress.yaml`) if the secret doesn't already exist, so this no longer
+   blocks the deploy flow — to do it yourself instead:
    ```bash
    openssl req -x509 -nodes -days 825 -newkey rsa:2048 \
      -keyout /tmp/tls.key -out /tmp/tls.crt \
@@ -83,7 +86,8 @@ kubectl apply -f 00-namespace.yaml
 cp secret.example.yaml secret.yaml   # edit with real MSAL values, then:
 kubectl apply -f secret.yaml
 
-# TLS secret for MSAL (see step 4 above) — must exist before applying ingress.yaml:
+# TLS secret for MSAL (see step 4 above) — must exist before applying ingress.yaml;
+# ./deploy.sh generates this for you automatically if it's missing:
 kubectl create secret tls honoris-frontend-tls -n honoris --cert=... --key=...
 
 kubectl apply -f build-job.yaml
