@@ -30,6 +30,16 @@ spec:
                 secretKeyRef:
                   name: honoris-frontend-build-secrets
                   key: VITE_MSAL_AUTHORITY
+            - name: VITE_MSAL_REDIRECT_URI
+              valueFrom:
+                secretKeyRef:
+                  name: honoris-frontend-build-secrets
+                  key: VITE_MSAL_REDIRECT_URI
+            - name: VITE_BACKEND_URL
+              valueFrom:
+                secretKeyRef:
+                  name: honoris-frontend-build-secrets
+                  key: VITE_BACKEND_URL
           # $(VAR) here is expanded by Kubernetes from the env: above before
           # the container ever starts — not a shell/Kaniko feature.
           args:
@@ -40,6 +50,8 @@ spec:
             - "--insecure-pull"
             - "--build-arg=VITE_MSAL_CLIENT_ID=$(VITE_MSAL_CLIENT_ID)"
             - "--build-arg=VITE_MSAL_AUTHORITY=$(VITE_MSAL_AUTHORITY)"
+            - "--build-arg=VITE_MSAL_REDIRECT_URI=$(VITE_MSAL_REDIRECT_URI)"
+            - "--build-arg=VITE_BACKEND_URL=$(VITE_BACKEND_URL)"
             # Caches the `npm install` layer (package*.json copied before the
             # rest of the source) — reused across rebuilds as long as
             # package-lock.json doesn't change.

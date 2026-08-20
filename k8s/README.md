@@ -60,9 +60,10 @@ have been run first — see below.
    > the Azure AD app registration — MSAL rejects a mismatched redirect URI.
 5. **Before building the image**, copy `secret.example.yaml` to `secret.yaml`
    and fill in the real `VITE_MSAL_CLIENT_ID` (and, if your Azure AD tenant
-   isn't `common`, `VITE_MSAL_AUTHORITY`) — `build-job.yaml` reads these from
-   that Secret. This is the one thing here that's baked in at image **build**
-   time, not configurable from the running container:
+   isn't `common`, `VITE_MSAL_AUTHORITY`), plus `VITE_MSAL_REDIRECT_URI` and
+   `VITE_BACKEND_URL` for the domain you're serving from — `build-job.yaml`
+   reads all four from that Secret. This is the one thing here that's baked
+   in at image **build** time, not configurable from the running container:
 
    > Vite replaces every `import.meta.env.VITE_*` reference with its actual
    > value at `npm run build` time (which Kaniko runs during `build-job.yaml`,
@@ -70,12 +71,16 @@ have been run first — see below.
    > has no effect on the already-built JS bundle — if `VITE_MSAL_CLIENT_ID`
    > is missing when the image is built, Microsoft login is broken in that
    > image, full stop, and the only fix is rebuilding it with the value set.
+   > Same for `VITE_MSAL_REDIRECT_URI`: it must exactly match a Redirect URI
+   > (SPA platform) registered on the Azure AD app behind `VITE_MSAL_CLIENT_ID`,
+   > or sign-in fails with `AADSTS50011`.
    >
-   > Everything else (`VITE_API_BASE_URL`, `VITE_WS_BASE_URL`, etc.) is left
-   > at the Dockerfile's own relative-path defaults (`/api`, empty, ...) —
-   > those work on **any** domain through the reverse proxy above, so unlike
-   > the MSAL values they don't need to be domain-specific or set per
-   > environment, and `build-job.yaml` doesn't pass them.
+   > `VITE_API_BASE_URL` is left at the Dockerfile's relative-path default
+   > (`/api`) since it works on **any** domain through the reverse proxy
+   > above. `VITE_BACKEND_URL` can't be relative the same way — the
+   > notifications socket in `chatbot.jsx`/`SignIn.jsx` builds a `ws(s)://` URL
+   > off of it — so it's set explicitly to the full origin in `secret.yaml`
+   > and passed as a build-arg alongside the MSAL values.
 
 ## Deploy
 
